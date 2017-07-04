@@ -23,7 +23,7 @@ public class Calendar {
         this.firstMonth = firstMonth;
         this.firstDayOfWeek = java.util.Calendar.getInstance(Locale.getDefault()).getFirstDayOfWeek();
 
-        int startMonth = firstMonth.getMonthOfYear()+1;
+        int startMonth = firstMonth.getMonthOfYear() + 1;
         int endMonth = lastMonth.getMonthOfYear();
 
         months = new ArrayList<>();

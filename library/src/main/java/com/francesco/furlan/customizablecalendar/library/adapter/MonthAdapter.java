@@ -23,7 +23,6 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 import io.reactivex.disposables.CompositeDisposable;
 
@@ -250,7 +249,7 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
         final int year = currentMonth.getYear();
         final int month = currentMonth.getMonthOfYear();
         final int firstDayOfMonth = currentMonth.getDayOfWeek() + 1;
-        final int lastDayOfMonth = DateUtils.getDaysInMonth(month-1, year);
+        final int lastDayOfMonth = DateUtils.getDaysInMonth(month - 1, year);
 
         if (viewInteractor != null && viewInteractor.hasImplementedDayCalculation()) {
             days = viewInteractor.calculateDays(year, month, firstDayOfMonth, lastDayOfMonth);

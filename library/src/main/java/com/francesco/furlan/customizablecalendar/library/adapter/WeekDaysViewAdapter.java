@@ -8,14 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.francesco.furlan.customizablecalendar.library.R;
 import com.francesco.furlan.customizablecalendar.library.interactors.ViewInteractor;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by francescofurlan on 28/06/17.
@@ -54,6 +50,17 @@ public class WeekDaysViewAdapter extends RecyclerView.Adapter<WeekDaysViewAdapte
         return weekDays.size();
     }
 
+    public String getItem(int position) {
+        return weekDays.get(position);
+    }
+
+    public void setClickListener(ItemClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
+    public interface ItemClickListener {
+        void onItemClick(View view, int position);
+    }
 
     public class WeekDayVH extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView weekDayTxt;
@@ -70,18 +77,6 @@ public class WeekDaysViewAdapter extends RecyclerView.Adapter<WeekDaysViewAdapte
                 clickListener.onItemClick(view, getAdapterPosition());
             }
         }
-    }
-
-    public String getItem(int position) {
-        return weekDays.get(position);
-    }
-
-    public void setClickListener(ItemClickListener clickListener) {
-        this.clickListener = clickListener;
-    }
-
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
     }
 }
 

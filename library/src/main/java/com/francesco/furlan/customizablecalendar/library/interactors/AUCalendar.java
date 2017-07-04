@@ -17,8 +17,9 @@ import io.reactivex.FlowableEmitter;
  */
 
 public class AUCalendar {
-    private Calendar calendar;
     private static AUCalendar AUCalendarInstance;
+    private Calendar calendar;
+    private List<CalendarObjectChangeListener> onChangeListenerList = new ArrayList<>();
 
     public static AUCalendar getInstance() {
         if (AUCalendarInstance == null) {
@@ -39,56 +40,12 @@ public class AUCalendar {
         return calendar.getFirstMonth();
     }
 
-    public interface ChangeSet {
-        List<String> getChangedFields();
-
-        boolean isFieldChanged(String fieldName);
-
-        String toString();
+    public Calendar getCalendar() {
+        return calendar;
     }
-
-    private class CalendarChangeSet implements ChangeSet {
-        private List<String> changedFields = new ArrayList<>();
-
-        public void setChangedFiels(List<String> changedFields) {
-            this.changedFields = changedFields;
-        }
-
-        public void addChangedField(String changedField) {
-            this.changedFields.add(changedField);
-        }
-
-        @Override
-        public List<String> getChangedFields() {
-            return changedFields;
-        }
-
-        @Override
-        public boolean isFieldChanged(String fieldName) {
-            return changedFields.contains(fieldName);
-        }
-        @Override
-        public String toString() {
-            String fieldChanges = "";
-            for (String fieldChanged : changedFields) {
-                fieldChanges += " " + fieldChanged;
-            }
-            return fieldChanges;
-        }
-    }
-
-    public interface CalendarObjectChangeListener {
-        void onChange(ChangeSet changeSet);
-    }
-
-    private List<CalendarObjectChangeListener> onChangeListenerList = new ArrayList<>();
 
     public void setCalendar(Calendar calendar) {
         this.calendar = calendar;
-    }
-
-    public Calendar getCalendar() {
-        return calendar;
     }
 
     public Flowable<ChangeSet> observeChangesOnCalendar() {
@@ -171,5 +128,48 @@ public class AUCalendar {
     public void setFirstDayOfWeek(int firstDayOfWeek) {
         calendar.setFirstDayOfWeek(firstDayOfWeek);
         emitOnChange(CalendarFields.FIRST_DAY_OF_WEEK);
+    }
+
+    public interface ChangeSet {
+        List<String> getChangedFields();
+
+        boolean isFieldChanged(String fieldName);
+
+        String toString();
+    }
+
+    public interface CalendarObjectChangeListener {
+        void onChange(ChangeSet changeSet);
+    }
+
+    private class CalendarChangeSet implements ChangeSet {
+        private List<String> changedFields = new ArrayList<>();
+
+        public void setChangedFiels(List<String> changedFields) {
+            this.changedFields = changedFields;
+        }
+
+        public void addChangedField(String changedField) {
+            this.changedFields.add(changedField);
+        }
+
+        @Override
+        public List<String> getChangedFields() {
+            return changedFields;
+        }
+
+        @Override
+        public boolean isFieldChanged(String fieldName) {
+            return changedFields.contains(fieldName);
+        }
+
+        @Override
+        public String toString() {
+            String fieldChanges = "";
+            for (String fieldChanged : changedFields) {
+                fieldChanges += " " + fieldChanged;
+            }
+            return fieldChanges;
+        }
     }
 }

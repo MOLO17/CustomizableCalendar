@@ -17,7 +17,6 @@ import com.francesco.furlan.customizablecalendar.library.presenter.interfeaces.C
 
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 

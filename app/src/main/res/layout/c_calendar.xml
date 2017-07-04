@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginEnd="30dp"
+    android:layout_marginStart="30dp"
+    android:orientation="vertical">
+
+    <com.francesco.furlan.customizablecalendar.library.components.HeaderView
+        android:id="@android:id/primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.francesco.furlan.customizablecalendar.library.components.SubView
+        android:id="@android:id/text2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp" />
+
+    <com.francesco.furlan.customizablecalendar.library.components.WeekDaysView
+        android:id="@android:id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp" />
+
+    <com.francesco.furlan.customizablecalendar.library.components.CalendarRecyclerView
+        android:id="@android:id/content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/customizable_calendar_height"
+        android:layout_marginTop="15dp" />
+
+</LinearLayout>

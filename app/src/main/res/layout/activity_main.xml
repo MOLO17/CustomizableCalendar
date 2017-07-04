@@ -1,7 +1,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white"
     android:orientation="vertical">
+
+    <com.francesco.furlan.customizablecalendar.library.components.CustomizableCalendar
+        android:id="@+id/view_month"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout="@layout/c_calendar" />
 
 </LinearLayout>

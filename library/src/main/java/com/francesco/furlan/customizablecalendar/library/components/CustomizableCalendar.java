@@ -2,8 +2,6 @@ package com.francesco.furlan.customizablecalendar.library.components;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -14,7 +12,6 @@ import com.francesco.furlan.customizablecalendar.library.interactors.ViewInterac
 import com.francesco.furlan.customizablecalendar.library.presenter.implementations.CustomizableCalendarPresenterImpl;
 import com.francesco.furlan.customizablecalendar.library.presenter.interfeaces.CustomizableCalendarPresenter;
 import com.francesco.furlan.customizablecalendar.library.view.CustomizableCalendarView;
-import com.google.gson.Gson;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

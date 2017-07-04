@@ -15,5 +15,7 @@ public interface BasePresenter<T extends BaseView> {
 
     void onBindView(View rootView);
 
+    void injectViewInteractor(ViewInteractor viewInteractor);
+
     void setLayoutResId(@LayoutRes int layoutResId);
 }

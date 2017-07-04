@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 25
@@ -19,6 +20,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -27,5 +32,14 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
     testCompile 'junit:junit:4.12'
+    compile 'joda-time:joda-time:2.9.9'
+    compile 'com.jakewharton:butterknife:6.1.0'
+    compile "io.reactivex.rxjava2:rxjava:2.0.1"
+    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.5.1'
+}
+
+retrolambda {
+    javaVersion JavaVersion.VERSION_1_7
 }

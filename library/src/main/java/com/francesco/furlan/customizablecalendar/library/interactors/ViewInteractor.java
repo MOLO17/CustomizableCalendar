@@ -40,4 +40,6 @@ public interface ViewInteractor {
     int setSelected(boolean multipleSelection, DateTime dateSelected);
 
     boolean hasImplementedMonthCellBinding();
+
+    View getMonthGridView(View rootView);
 }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.francesco.furlan.customizablecalendar.library.R;
 import com.francesco.furlan.customizablecalendar.library.components.MonthGridView;
 import com.francesco.furlan.customizablecalendar.library.interactors.AUCalendar;
 import com.francesco.furlan.customizablecalendar.library.interactors.ViewInteractor;
@@ -38,8 +39,9 @@ public class CalendarViewAdapter extends RecyclerView.Adapter<CalendarViewAdapte
     @Override
     public CalendarViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View rootView;
-        if (layoutResId != -1) {
+        if (layoutResId != -1 && layoutResId != R.layout.calendar_view) {
             rootView = LayoutInflater.from(context).inflate(layoutResId, null);
+            rootView = viewInteractor.getMonthGridView(rootView);
         } else {
             MonthGridView monthGridView = new MonthGridView(context);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);

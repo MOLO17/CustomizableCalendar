@@ -98,6 +98,11 @@ public class CalendarViewInteractor implements ViewInteractor {
         return false;
     }
 
+    @Override
+    public View getMonthGridView(View rootView) {
+        return null;
+    }
+
     void updateCalendar(Calendar calendar) {
         this.calendar = calendar;
         if (firstDaySelectedTxt != null && lastDaySelectedTxt != null) {

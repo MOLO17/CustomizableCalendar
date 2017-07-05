@@ -69,8 +69,8 @@ public class CalendarViewInteractor implements ViewInteractor {
     }
 
     @Override
-    public void onMonthCellBindView(View view) {
-
+    public View onMonthCellBindView(View view, CalendarItem currentItem) {
+        return null;
     }
 
     @Override

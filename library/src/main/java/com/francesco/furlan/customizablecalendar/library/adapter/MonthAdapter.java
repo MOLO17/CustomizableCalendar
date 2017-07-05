@@ -92,13 +92,14 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
     public View getView(int position, View view, ViewGroup parent) {
         final CalendarItem currentItem = days.get(position);
 
+        if (view == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(layoutResId, null);
+        }
+
         if (viewInteractor != null && viewInteractor.hasImplementedMonthCellBinding()) {
             view = viewInteractor.onMonthCellBindView(view, currentItem);
         } else {
-            if (view == null) {
-                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                view = inflater.inflate(layoutResId, null);
-            }
             final TextView dayView = (TextView) view.findViewById(android.R.id.title);
             final View background = view.findViewById(android.R.id.background);
             final View startSelectionView = view.findViewById(android.R.id.startSelectingText);

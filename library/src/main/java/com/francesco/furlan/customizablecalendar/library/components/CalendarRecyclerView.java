@@ -1,6 +1,7 @@
 package com.francesco.furlan.customizablecalendar.library.components;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
@@ -9,6 +10,7 @@ import android.support.v7.widget.SnapHelper;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.francesco.furlan.customizablecalendar.library.R;
 import com.francesco.furlan.customizablecalendar.library.adapter.CalendarViewAdapter;
 import com.francesco.furlan.customizablecalendar.library.interactors.AUCalendar;
 import com.francesco.furlan.customizablecalendar.library.interactors.ViewInteractor;
@@ -31,6 +33,12 @@ public class CalendarRecyclerView extends RecyclerView implements CalendarView {
     private int prevPosition = 0;
     private int detachPosition = 0;
     private AUCalendar calendar;
+    private
+    @LayoutRes
+    int monthResId = R.layout.calendar_view;
+    private
+    @LayoutRes
+    int monthCellResId = R.layout.calendar_cell;
 
     public CalendarRecyclerView(Context context) {
         this(context, null);
@@ -42,11 +50,19 @@ public class CalendarRecyclerView extends RecyclerView implements CalendarView {
 
     public CalendarRecyclerView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(context);
+        init(context, attrs);
     }
 
-    private void init(Context context) {
+    private void init(Context context, AttributeSet attrs) {
         this.context = context;
+
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomizableCalendar);
+        if (typedArray != null) {
+            monthResId = typedArray.getResourceId(R.styleable.CustomizableCalendar_month_layout, R.layout.calendar_view);
+            monthCellResId = typedArray.getResourceId(R.styleable.CustomizableCalendar_cell_layout, R.layout.calendar_cell);
+            typedArray.recycle();
+        }
+
         linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         setLayoutManager(linearLayoutManager);
@@ -82,6 +98,8 @@ public class CalendarRecyclerView extends RecyclerView implements CalendarView {
     private void setupCalendarAdapter() {
         calendarViewAdapter = new CalendarViewAdapter(context);
         calendarViewAdapter.injectViewInteractor(viewInteractor);
+        calendarViewAdapter.setLayoutResId(monthResId);
+        calendarViewAdapter.setDayLayoutResId(monthCellResId);
         setAdapter(calendarViewAdapter);
     }
 

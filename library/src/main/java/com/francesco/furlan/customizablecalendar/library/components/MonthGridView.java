@@ -55,6 +55,7 @@ public class MonthGridView extends LinearLayout implements BaseView {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomizableCalendar);
         if (typedArray != null) {
             layoutResId = typedArray.getResourceId(R.styleable.CustomizableCalendar_month_layout, R.layout.calendar_view);
+            dayLayoutResId = typedArray.getResourceId(R.styleable.CustomizableCalendar_cell_layout, R.layout.calendar_cell);
             typedArray.recycle();
         }
 

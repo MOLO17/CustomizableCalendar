@@ -28,7 +28,6 @@ public class WeekDaysView extends RecyclerView implements com.francesco.furlan.c
     WeekDaysViewAdapter weekDaysViewAdapter;
     private Context context;
     private @LayoutRes int layoutResId = -1;
-    private @LayoutRes int dayLayoutResId = -1;
     private ViewInteractor viewInteractor;
     private Integer firstDayOfWeek;
     private CustomizableCalendarPresenter presenter;
@@ -51,7 +50,7 @@ public class WeekDaysView extends RecyclerView implements com.francesco.furlan.c
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomizableCalendar);
         layoutResId = R.layout.week_day_view;
         if (typedArray != null) {
-            layoutResId = typedArray.getResourceId(R.styleable.CustomizableCalendar_weekDayLayout, R.layout.week_day_view);
+            layoutResId = typedArray.getResourceId(R.styleable.CustomizableCalendar_layout, R.layout.week_day_view);
             typedArray.recycle();
         }
     }

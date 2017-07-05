@@ -4,6 +4,5 @@
         <attr name="layout" format="reference" />
         <attr name="month_layout" format="reference" />
         <attr name="cell_layout" format="reference" />
-        <attr name="weekDayLayout" format="reference" />
     </declare-styleable>
 </resources>

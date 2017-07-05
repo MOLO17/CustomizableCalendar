@@ -106,45 +106,45 @@ public class CustomizableCalendarPresenterImpl implements CustomizableCalendarPr
         this.weekDaysView.injectViewInteractor(viewInteractor);
     }
 
-    @Override
-    public void setCustomizableCalendarLayoutResId(@LayoutRes int resId) {
-        if (view != null) {
-            view.setLayoutResId(resId);
-        }
-    }
-
-    @Override
-    public void setHeaderLayoutResId(@LayoutRes int resId) {
-        if (headerView != null) {
-            headerView.setLayoutResId(resId);
-        }
-    }
-
-    @Override
-    public void setWeekDayResId(@LayoutRes int resId) {
-        if (weekDaysView != null) {
-            weekDaysView.setLayoutResId(resId);
-        }
-    }
-
-    @Override
-    public void setSubViewResId(@LayoutRes int resId) {
-        if (subView != null) {
-            subView.setLayoutResId(resId);
-        }
-    }
-
-    @Override
-    public void setMonthResId(@LayoutRes int resId) {
-        if (calendarView != null) {
-            calendarView.setMonthLayoutResId(resId);
-        }
-    }
-
-    @Override
-    public void setDayResId(@LayoutRes int resId) {
-        if (calendarView != null) {
-            calendarView.setDayLayoutResId(resId);
-        }
-    }
+//    @Override
+//    public void setCustomizableCalendarLayoutResId(@LayoutRes int resId) {
+//        if (view != null) {
+//            view.setLayoutResId(resId);
+//        }
+//    }
+//
+//    @Override
+//    public void setHeaderLayoutResId(@LayoutRes int resId) {
+//        if (headerView != null) {
+//            headerView.setLayoutResId(resId);
+//        }
+//    }
+//
+//    @Override
+//    public void setWeekDayResId(@LayoutRes int resId) {
+//        if (weekDaysView != null) {
+//            weekDaysView.setLayoutResId(resId);
+//        }
+//    }
+//
+//    @Override
+//    public void setSubViewResId(@LayoutRes int resId) {
+//        if (subView != null) {
+//            subView.setLayoutResId(resId);
+//        }
+//    }
+//
+//    @Override
+//    public void setMonthResId(@LayoutRes int resId) {
+//        if (calendarView != null) {
+//            calendarView.setMonthLayoutResId(resId);
+//        }
+//    }
+//
+//    @Override
+//    public void setDayResId(@LayoutRes int resId) {
+//        if (calendarView != null) {
+//            calendarView.setDayLayoutResId(resId);
+//        }
+//    }
 }

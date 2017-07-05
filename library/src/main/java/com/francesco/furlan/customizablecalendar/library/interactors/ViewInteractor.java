@@ -29,7 +29,7 @@ public interface ViewInteractor {
 
     void onMonthBindView(View view);
 
-    void onMonthCellBindView(View view);
+    View onMonthCellBindView(View view, CalendarItem currentItem);
 
     boolean hasImplementedDayCalculation();
 

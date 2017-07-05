@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.molo17.customizablecalendar.library.components.CustomizableCalendar;
 import com.molo17.customizablecalendar.library.interactors.AUCalendar;
 import com.molo17.customizablecalendar.library.model.Calendar;
-import com.molo17.customizablecalendar.R;
 
 import org.joda.time.DateTime;
 

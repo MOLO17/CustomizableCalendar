@@ -11,7 +11,6 @@ import com.molo17.customizablecalendar.library.adapter.WeekDaysViewAdapter;
 import com.molo17.customizablecalendar.library.interactors.ViewInteractor;
 import com.molo17.customizablecalendar.library.model.Calendar;
 import com.molo17.customizablecalendar.library.model.CalendarItem;
-import com.molo17.customizablecalendar.R;
 
 import org.joda.time.DateTime;
 

@@ -26,12 +26,14 @@ public class MonthGridView extends LinearLayout implements BaseView {
     protected DateTime monthDateTime;
     private MonthAdapter calendarAdapter;
     private GridView calendarGrid;
+    private LinearLayout calendarLayout;
     private
     @LayoutRes
     int layoutResId = -1;
     private
     @LayoutRes
     int dayLayoutResId = -1;
+    private ViewInteractor viewInteractor;
 
     public MonthGridView(Context context) {
         this(context, null);
@@ -73,8 +75,8 @@ public class MonthGridView extends LinearLayout implements BaseView {
 
     @Override
     public void injectViewInteractor(ViewInteractor viewInteractor) {
+        this.viewInteractor = viewInteractor;
         bindViews();
-        calendarAdapter.injectViewInteractor(viewInteractor);
         setupCalendar();
     }
 
@@ -84,17 +86,16 @@ public class MonthGridView extends LinearLayout implements BaseView {
     }
 
     private void bindViews() {
-        final LinearLayout calendarLayout = (LinearLayout) LayoutInflater.from(getContext()).inflate(layoutResId, this);
+        calendarLayout = (LinearLayout) LayoutInflater.from(getContext()).inflate(layoutResId, this);
         calendarGrid = (GridView) calendarLayout.findViewById(android.R.id.widget_frame);
-        calendarAdapter = new MonthAdapter(getContext());
-        calendarAdapter.setLayoutResId(dayLayoutResId);
-        calendarAdapter.refreshDays();
     }
 
     private void setupCalendar() {
         calendarAdapter = new MonthAdapter(getContext());
 
         calendarAdapter.setLayoutResId(dayLayoutResId);
+
+        calendarAdapter.injectViewInteractor(viewInteractor);
 
         calendarAdapter.refreshDays();
 

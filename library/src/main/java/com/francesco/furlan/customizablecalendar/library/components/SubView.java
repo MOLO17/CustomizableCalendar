@@ -1,6 +1,7 @@
 package com.francesco.furlan.customizablecalendar.library.components;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.annotation.LayoutRes;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -32,6 +33,7 @@ public class SubView extends RelativeLayout implements com.francesco.furlan.cust
 
     private @LayoutRes int layoutResId = R.layout.sub_view;
     private CustomizableCalendarPresenter presenter;
+    private Context context;
 
     public SubView(Context context) {
         this(context, null);
@@ -47,6 +49,13 @@ public class SubView extends RelativeLayout implements com.francesco.furlan.cust
     }
 
     private void init(Context context, AttributeSet attrs) {
+        this.context = context;
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomizableCalendar);
+        if (typedArray != null) {
+            layoutResId = typedArray.getResourceId(R.styleable.CustomizableCalendar_layout, R.layout.sub_view);
+            typedArray.recycle();
+        }
+
         LayoutInflater.from(context).inflate(layoutResId, this);
         ButterKnife.inject(this);
     }

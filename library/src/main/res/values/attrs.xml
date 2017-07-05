@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomizableCalendar">
+        <attr name="layout" format="reference" />
+        <attr name="month_layout" format="reference" />
+        <attr name="cell_layout" format="reference" />
+    </declare-styleable>
+</resources>

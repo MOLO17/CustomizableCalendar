@@ -81,8 +81,10 @@ public class AUCalendar {
     }
 
     public void setFirstSelectedDay(DateTime firstSelectedDay) {
-        calendar.setFirstSelectedDay(firstSelectedDay);
-        emitOnChange(CalendarFields.FIRST_SELECTED_DAY);
+        if (calendar.getFirstSelectedDay() != firstSelectedDay) {
+            calendar.setFirstSelectedDay(firstSelectedDay);
+            emitOnChange(CalendarFields.FIRST_SELECTED_DAY);
+        }
     }
 
     public DateTime getLastSelectedDay() {
@@ -90,8 +92,10 @@ public class AUCalendar {
     }
 
     public void setLastSelectedDay(DateTime lastSelectedDay) {
-        calendar.setLastSelectedDay(lastSelectedDay);
-        emitOnChange(CalendarFields.LAST_SELECTED_DAY);
+        if (calendar.getLastSelectedDay() != lastSelectedDay) {
+            calendar.setLastSelectedDay(lastSelectedDay);
+            emitOnChange(CalendarFields.LAST_SELECTED_DAY);
+        }
     }
 
     public DateTime getCurrentMonth() {
@@ -99,8 +103,10 @@ public class AUCalendar {
     }
 
     public void setCurrentMonth(DateTime currentMonth) {
-        calendar.setCurrentMonth(currentMonth);
-        emitOnChange(CalendarFields.CURRENT_MONTH);
+        if (calendar.getCurrentMonth() != currentMonth) {
+            calendar.setCurrentMonth(currentMonth);
+            emitOnChange(CalendarFields.CURRENT_MONTH);
+        }
     }
 
     public List<DateTime> getMonths() {
@@ -108,8 +114,10 @@ public class AUCalendar {
     }
 
     public void setMonths(List<DateTime> months) {
-        calendar.setMonths(months);
-        emitOnChange(CalendarFields.MONTHS);
+        if (calendar.getMonths() != months) {
+            calendar.setMonths(months);
+            emitOnChange(CalendarFields.MONTHS);
+        }
     }
 
     public boolean isMultipleSelectionEnabled() {
@@ -117,8 +125,10 @@ public class AUCalendar {
     }
 
     public void setMultipleSelection(boolean multipleSelection) {
-        calendar.setMultipleSelection(multipleSelection);
-        emitOnChange(CalendarFields.MULTIPLE_SELECTION);
+        if (calendar.isMultipleSelectionEnabled() != multipleSelection) {
+            calendar.setMultipleSelection(multipleSelection);
+            emitOnChange(CalendarFields.MULTIPLE_SELECTION);
+        }
     }
 
     public int getFirstDayOfWeek() {
@@ -126,8 +136,10 @@ public class AUCalendar {
     }
 
     public void setFirstDayOfWeek(int firstDayOfWeek) {
-        calendar.setFirstDayOfWeek(firstDayOfWeek);
-        emitOnChange(CalendarFields.FIRST_DAY_OF_WEEK);
+        if (calendar.getFirstDayOfWeek() != firstDayOfWeek) {
+            calendar.setFirstDayOfWeek(firstDayOfWeek);
+            emitOnChange(CalendarFields.FIRST_DAY_OF_WEEK);
+        }
     }
 
     public interface ChangeSet {

@@ -16,6 +16,9 @@ import com.molo17.customizablecalendar.library.view.WeekDaysView;
 
 import org.joda.time.DateTime;
 
+import java.text.DateFormatSymbols;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -104,6 +107,36 @@ public class CustomizableCalendarPresenterImpl implements CustomizableCalendarPr
     public void injectWeekDaysView(WeekDaysView weekDaysView) {
         this.weekDaysView = weekDaysView;
         this.weekDaysView.injectViewInteractor(viewInteractor);
+    }
+
+    @Override
+    public List<String> setupWeekDays() {
+        String[] namesOfDays = DateFormatSymbols.getInstance(Locale.getDefault()).getShortWeekdays();
+        int firstDayOfWeek = calendar.getFirstDayOfWeek();
+
+        List<String> weekDays = new ArrayList<>();
+        for (int i = firstDayOfWeek; i < namesOfDays.length; i++) {
+            String nameOfDay = namesOfDays[i];
+            String formattedNameOfDay = getFormattedDayOfDay(nameOfDay);
+            if (formattedNameOfDay != null) {
+                weekDays.add(formattedNameOfDay);
+            }
+        }
+        for (int i = 0; i < firstDayOfWeek; i++) {
+            String nameOfDay = namesOfDays[i];
+            String formattedNameOfDay = getFormattedDayOfDay(nameOfDay);
+            if (formattedNameOfDay != null) {
+                weekDays.add(formattedNameOfDay);
+            }
+        }
+        return weekDays;
+    }
+
+    private String getFormattedDayOfDay(String nameOfDay) {
+        if (!TextUtils.isEmpty(nameOfDay)) {
+            return nameOfDay.substring(0, 1).toUpperCase();
+        }
+        return null;
     }
 
 //    @Override

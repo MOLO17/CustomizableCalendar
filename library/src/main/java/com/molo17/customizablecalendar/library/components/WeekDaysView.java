@@ -31,6 +31,7 @@ public class WeekDaysView extends RecyclerView implements com.molo17.customizabl
     private ViewInteractor viewInteractor;
     private Integer firstDayOfWeek;
     private CustomizableCalendarPresenter presenter;
+    private List<String> weekDays;
 
     public WeekDaysView(Context context) {
         this(context, null);
@@ -55,14 +56,7 @@ public class WeekDaysView extends RecyclerView implements com.molo17.customizabl
         }
     }
 
-    private String getFormattedDayOfDay(String nameOfDay) {
-        if (!TextUtils.isEmpty(nameOfDay)) {
-            return nameOfDay.substring(0, 1).toUpperCase();
-        }
-        return null;
-    }
-
-    public void setWeekDays(List<String> weekDays) {
+    public void setWeekDays() {
         weekDaysViewAdapter = new WeekDaysViewAdapter(context, weekDays, layoutResId, viewInteractor);
         setAdapter(weekDaysViewAdapter);
         setLayoutManager(new GridLayoutManager(context, weekDays.size()));
@@ -81,43 +75,26 @@ public class WeekDaysView extends RecyclerView implements com.molo17.customizabl
     @Override
     public void injectViewInteractor(ViewInteractor viewInteractor) {
         this.viewInteractor = viewInteractor;
-        setupWeekDays();
+        viewInteractor.onWeekDaysBindView(this);
+        weekDays = presenter.setupWeekDays();
+        updateWeekDays();
     }
 
     @Override
     public void injectPresenter(CustomizableCalendarPresenter presenter) {
         this.presenter = presenter;
         presenter.injectWeekDaysView(this);
+        updateWeekDays();
     }
 
     @Override
     public void onFirstDayOfWeek(int firstDayOfWeek) {
         this.firstDayOfWeek = firstDayOfWeek;
-        setupWeekDays();
     }
 
-    private void setupWeekDays() {
+    private void updateWeekDays() {
         viewInteractor.onWeekDaysBindView(this);
-        String[] namesOfDays = DateFormatSymbols.getInstance(Locale.getDefault()).getShortWeekdays();
-        if (firstDayOfWeek == null) {
-            firstDayOfWeek = AUCalendar.getInstance().getFirstDayOfWeek();
-        }
-
-        List<String> weekDays = new ArrayList<>();
-        for (int i = firstDayOfWeek; i < namesOfDays.length; i++) {
-            String nameOfDay = namesOfDays[i];
-            String formattedNameOfDay = getFormattedDayOfDay(nameOfDay);
-            if (formattedNameOfDay != null) {
-                weekDays.add(formattedNameOfDay);
-            }
-        }
-        for (int i = 0; i < firstDayOfWeek; i++) {
-            String nameOfDay = namesOfDays[i];
-            String formattedNameOfDay = getFormattedDayOfDay(nameOfDay);
-            if (formattedNameOfDay != null) {
-                weekDays.add(formattedNameOfDay);
-            }
-        }
-        setWeekDays(weekDays);
+        weekDays = presenter.setupWeekDays();
+        setWeekDays();
     }
 }

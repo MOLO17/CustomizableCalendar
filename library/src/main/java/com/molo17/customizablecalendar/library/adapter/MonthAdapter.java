@@ -45,18 +45,17 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
 
     private CompositeDisposable subscriptions;
 
-    public MonthAdapter(Context context) {
+    public MonthAdapter(Context context, DateTime currentMonth) {
         this.context = context;
         this.subscriptions = new CompositeDisposable();
         this.calendar = AUCalendar.getInstance();
         this.layoutResId = R.layout.calendar_cell;
+        this.currentMonth = currentMonth.withDayOfMonth(1).withMillisOfDay(0);
         initFromCalendar();
         subscribe();
     }
 
     private void initFromCalendar() {
-        currentMonth = calendar.getCurrentMonth().withDayOfMonth(1).withMillisOfDay(0);
-
         firstSelectedDay = calendar.getFirstSelectedDay();
         if (firstSelectedDay != null) {
             firstSelectedDay = firstSelectedDay.withMillisOfDay(0);

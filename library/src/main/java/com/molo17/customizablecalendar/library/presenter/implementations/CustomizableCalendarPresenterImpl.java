@@ -57,13 +57,22 @@ public class CustomizableCalendarPresenterImpl implements CustomizableCalendarPr
         subscriptions.add(
                 calendar.observeChangesOnCalendar()
                         .subscribe(changeSet -> {
-                            if (changeSet.isFieldChanged(CalendarFields.CURRENT_MONTH)) {
+                            boolean currentMonthChanged = changeSet.isFieldChanged(CalendarFields.CURRENT_MONTH);
+                            boolean firstDayOfWeekChanged = changeSet.isFieldChanged(CalendarFields.FIRST_DAY_OF_WEEK);
+                            boolean firstSelectedDayChanged = changeSet.isFieldChanged(CalendarFields.FIRST_SELECTED_DAY);
+                            boolean lastSelectedDayChanged = changeSet.isFieldChanged(CalendarFields.LAST_SELECTED_DAY);
+
+                            if (currentMonthChanged) {
                                 onCurrentMonthChanged(calendar.getCurrentMonth());
                             }
-                            if (changeSet.isFieldChanged(CalendarFields.FIRST_DAY_OF_WEEK)) {
+
+                            if (firstDayOfWeekChanged) {
                                 if (weekDaysView != null) {
                                     weekDaysView.onFirstDayOfWeek(calendar.getFirstDayOfWeek());
                                 }
+                            }
+
+                            if (firstDayOfWeekChanged || firstSelectedDayChanged || lastSelectedDayChanged) {
                                 if (calendarView != null) {
                                     calendarView.refreshData();
                                 }

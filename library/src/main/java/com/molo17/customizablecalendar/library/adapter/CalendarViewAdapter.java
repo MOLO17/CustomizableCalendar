@@ -15,6 +15,8 @@ import com.molo17.customizablecalendar.library.interactors.ViewInteractor;
 import com.molo17.customizablecalendar.library.presenter.interfeaces.CustomizableCalendarPresenter;
 import com.molo17.customizablecalendar.library.view.BaseView;
 
+import org.joda.time.DateTime;
+
 /**
  * Created by francescofurlan on 23/06/17.
  */
@@ -57,7 +59,8 @@ public class CalendarViewAdapter extends RecyclerView.Adapter<CalendarViewAdapte
 
     @Override
     public void onBindViewHolder(final CalendarViewHolder viewHolder, final int position) {
-        viewHolder.monthView.refreshData();
+        DateTime currentMonth = calendar.getMonths().get(position);
+        viewHolder.monthView.setCurrentMonth(currentMonth);
     }
 
     @Override

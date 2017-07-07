@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.molo17.customizablecalendar.library.R;
 import com.molo17.customizablecalendar.library.adapter.MonthAdapter;
+import com.molo17.customizablecalendar.library.interactors.AUCalendar;
 import com.molo17.customizablecalendar.library.interactors.ViewInteractor;
 import com.molo17.customizablecalendar.library.model.CalendarItem;
 import com.molo17.customizablecalendar.library.presenter.interfeaces.CustomizableCalendarPresenter;
@@ -26,7 +27,7 @@ public class MonthGridView extends LinearLayout implements BaseView {
     protected DateTime monthDateTime;
     private MonthAdapter calendarAdapter;
     private GridView calendarGrid;
-    private LinearLayout calendarLayout;
+    private DateTime currentMonth;
     private
     @LayoutRes
     int layoutResId = -1;
@@ -87,12 +88,15 @@ public class MonthGridView extends LinearLayout implements BaseView {
     }
 
     private void bindViews() {
-        calendarLayout = (LinearLayout) LayoutInflater.from(getContext()).inflate(layoutResId, this);
+        LinearLayout calendarLayout = (LinearLayout) LayoutInflater.from(getContext()).inflate(layoutResId, this);
         calendarGrid = (GridView) calendarLayout.findViewById(android.R.id.widget_frame);
     }
 
     private void setupCalendar() {
-        calendarAdapter = new MonthAdapter(getContext());
+        if (currentMonth == null) {
+            currentMonth = AUCalendar.getInstance().getCurrentMonth();
+        }
+        calendarAdapter = new MonthAdapter(getContext(), currentMonth);
 
         calendarAdapter.setLayoutResId(dayLayoutResId);
 
@@ -122,5 +126,10 @@ public class MonthGridView extends LinearLayout implements BaseView {
         if (calendarAdapter != null) {
             calendarAdapter.unsubscribe();
         }
+    }
+
+    public void setCurrentMonth(DateTime currentMonth) {
+        this.currentMonth = currentMonth;
+        setupCalendar();
     }
 }

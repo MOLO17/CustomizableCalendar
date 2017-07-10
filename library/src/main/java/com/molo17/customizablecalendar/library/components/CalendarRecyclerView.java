@@ -102,6 +102,20 @@ public class CalendarRecyclerView extends RecyclerView implements CalendarView {
     private void setupCalendarScroll() {
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(this);
+        addOnChildAttachStateChangeListener(new OnChildAttachStateChangeListener() {
+            @Override
+            public void onChildViewAttachedToWindow(View view) {
+                MonthGridView monthGridView = (MonthGridView) view;
+                monthGridView.subscribe();
+            }
+
+            @Override
+            public void onChildViewDetachedFromWindow(View view) {
+                MonthGridView monthGridView = (MonthGridView) view;
+                monthGridView.unsubscribe();
+            }
+        });
+
         addOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

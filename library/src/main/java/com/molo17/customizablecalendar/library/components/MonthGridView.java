@@ -122,6 +122,12 @@ public class MonthGridView extends LinearLayout implements BaseView {
         setupCalendar();
     }
 
+    public void subscribe() {
+        if (calendarAdapter != null) {
+            calendarAdapter.subscribe();
+        }
+    }
+
     public void unsubscribe() {
         if (calendarAdapter != null) {
             calendarAdapter.unsubscribe();

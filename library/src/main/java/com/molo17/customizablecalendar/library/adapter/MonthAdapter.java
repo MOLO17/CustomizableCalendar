@@ -265,7 +265,7 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
             }
 
             int totDays = lastDayOfMonth + empties;
-            for (int day = 1, position = 1; position < totDays; position++) {
+            for (int day = 1, position = 1; position <= totDays; position++) {
                 if (position > empties) {
                     updatedDays.add(new CalendarItem(day++, month, year));
                 } else {

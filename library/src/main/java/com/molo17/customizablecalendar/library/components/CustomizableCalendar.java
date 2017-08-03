@@ -13,8 +13,8 @@ import com.molo17.customizablecalendar.library.presenter.implementations.Customi
 import com.molo17.customizablecalendar.library.presenter.interfeaces.CustomizableCalendarPresenter;
 import com.molo17.customizablecalendar.library.view.CustomizableCalendarView;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by francescofurlan on 23/06/17.
@@ -22,16 +22,16 @@ import butterknife.InjectView;
 
 public class CustomizableCalendar extends LinearLayout implements CustomizableCalendarView {
 
-    @InjectView(android.R.id.primary)
+    @BindView(android.R.id.primary)
     HeaderView headerView;
 
-    @InjectView(android.R.id.text1)
+    @BindView(android.R.id.text1)
     WeekDaysView weekDaysView;
 
-    @InjectView(android.R.id.text2)
+    @BindView(android.R.id.text2)
     SubView subView;
 
-    @InjectView(android.R.id.content)
+    @BindView(android.R.id.content)
     CalendarRecyclerView calendarRecyclerView;
 
     CustomizableCalendarPresenter presenter;
@@ -63,7 +63,7 @@ public class CustomizableCalendar extends LinearLayout implements CustomizableCa
             }
 
             LayoutInflater.from(context).inflate(layoutResId, this);
-            ButterKnife.inject(this);
+            ButterKnife.bind(this);
         }
     }
 

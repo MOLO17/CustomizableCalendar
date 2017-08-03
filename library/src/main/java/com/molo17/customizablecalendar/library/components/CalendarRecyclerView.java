@@ -6,7 +6,6 @@ import android.support.annotation.LayoutRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SnapHelper;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -29,9 +28,6 @@ public class CalendarRecyclerView extends RecyclerView implements CalendarView {
     private ViewInteractor viewInteractor;
     private Context context;
     private CustomizableCalendarPresenter presenter;
-    private int currentPosition = 0;
-    private int prevPosition = 0;
-    private int detachPosition = 0;
     private AUCalendar calendar;
     private
     @LayoutRes
@@ -104,35 +100,38 @@ public class CalendarRecyclerView extends RecyclerView implements CalendarView {
     }
 
     private void setupCalendarScroll() {
-        SnapHelper snapHelper = new PagerSnapHelper();
+        PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(this);
-
-        addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
+        addOnChildAttachStateChangeListener(new OnChildAttachStateChangeListener() {
             @Override
             public void onChildViewAttachedToWindow(View view) {
-                prevPosition = currentPosition;
-                currentPosition = getChildAdapterPosition(view);
-                updateCurrentMonth();
                 MonthGridView monthGridView = (MonthGridView) view;
-                monthGridView.refreshData();
+                monthGridView.subscribe();
             }
 
             @Override
             public void onChildViewDetachedFromWindow(View view) {
                 MonthGridView monthGridView = (MonthGridView) view;
-                detachPosition = getChildAdapterPosition(view);
-                if (detachPosition == currentPosition) {
-                    currentPosition = prevPosition;
-                    updateCurrentMonth();
-                }
                 monthGridView.unsubscribe();
             }
         });
-    }
 
-    private void updateCurrentMonth() {
-        DateTime currentMonth = calendar.getMonths().get(currentPosition);
-        calendar.setCurrentMonth(currentMonth);
+        addOnScrollListener(new OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                switch (newState) {
+                    case SCROLL_STATE_IDLE: {
+                        View view = snapHelper.findSnapView(linearLayoutManager);
+                        if (view != null) {
+                            int currentPosition = getChildAdapterPosition(view);
+                            DateTime currentMonth = calendar.getMonths().get(currentPosition);
+                            calendar.setCurrentMonth(currentMonth);
+                        }
+                    }
+                }
+            }
+        });
     }
 
     @Override

@@ -44,19 +44,19 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
     private int firstDayOfWeek;
 
     private CompositeDisposable subscriptions;
+    private boolean subscribed;
 
-    public MonthAdapter(Context context) {
+    public MonthAdapter(Context context, DateTime currentMonth) {
         this.context = context;
         this.subscriptions = new CompositeDisposable();
         this.calendar = AUCalendar.getInstance();
         this.layoutResId = R.layout.calendar_cell;
+        this.currentMonth = currentMonth.withDayOfMonth(1).withMillisOfDay(0);
         initFromCalendar();
         subscribe();
     }
 
     private void initFromCalendar() {
-        currentMonth = calendar.getCurrentMonth().withDayOfMonth(1).withMillisOfDay(0);
-
         firstSelectedDay = calendar.getFirstSelectedDay();
         if (firstSelectedDay != null) {
             firstSelectedDay = firstSelectedDay.withMillisOfDay(0);
@@ -250,6 +250,7 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
         final int month = currentMonth.getMonthOfYear();
         final int firstDayOfMonth = currentMonth.getDayOfWeek() + 1;
         final int lastDayOfMonth = DateUtils.getDaysInMonth(month - 1, year);
+        List<CalendarItem> updatedDays = new ArrayList<>();
 
         if (viewInteractor != null && viewInteractor.hasImplementedDayCalculation()) {
             days = viewInteractor.calculateDays(year, month, firstDayOfMonth, lastDayOfMonth);
@@ -264,36 +265,43 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
             }
 
             int totDays = lastDayOfMonth + empties;
-            days = new ArrayList<>(totDays);
-
-            for (int day = 1, position = 1; position < totDays; position++) {
+            for (int day = 1, position = 1; position <= totDays; position++) {
                 if (position > empties) {
-                    days.add(new CalendarItem(day++, month, year));
+                    updatedDays.add(new CalendarItem(day++, month, year));
                 } else {
-                    days.add(null);
+                    updatedDays.add(null);
                 }
             }
-        }
 
-        notifyDataSetChanged();
+        }
+        if (!updatedDays.equals(days)) {
+            days = updatedDays;
+            notifyDataSetChanged();
+        }
     }
 
-    private void subscribe() {
-        subscriptions.add(
-                calendar.observeChangesOnCalendar()
-                        .subscribe(changeSet -> {
-                            if (changeSet.isFieldChanged(CalendarFields.FIRST_DAY_OF_WEEK)
-                                    || changeSet.isFieldChanged(CalendarFields.FIRST_SELECTED_DAY)
-                                    || changeSet.isFieldChanged(CalendarFields.LAST_SELECTED_DAY)) {
-                                initFromCalendar();
-                                refreshDays();
-                            }
-                        })
-        );
+    public void subscribe() {
+        if (!subscribed) {
+            subscriptions.add(
+                    calendar.observeChangesOnCalendar()
+                            .subscribe(changeSet -> {
+                                if (changeSet.isFieldChanged(CalendarFields.FIRST_DAY_OF_WEEK)
+                                        || changeSet.isFieldChanged(CalendarFields.FIRST_SELECTED_DAY)
+                                        || changeSet.isFieldChanged(CalendarFields.LAST_SELECTED_DAY)) {
+                                    initFromCalendar();
+                                    refreshDays();
+                                }
+                            })
+            );
+            subscribed = true;
+        }
     }
 
     @Override
     public void unsubscribe() {
-        subscriptions.clear();
+        if (subscribed) {
+            subscriptions.clear();
+            subscribed = false;
+        }
     }
 }

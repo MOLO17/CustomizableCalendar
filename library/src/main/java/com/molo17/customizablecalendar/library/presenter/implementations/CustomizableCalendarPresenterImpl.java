@@ -16,6 +16,9 @@ import com.molo17.customizablecalendar.library.view.WeekDaysView;
 
 import org.joda.time.DateTime;
 
+import java.text.DateFormatSymbols;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -54,13 +57,22 @@ public class CustomizableCalendarPresenterImpl implements CustomizableCalendarPr
         subscriptions.add(
                 calendar.observeChangesOnCalendar()
                         .subscribe(changeSet -> {
-                            if (changeSet.isFieldChanged(CalendarFields.CURRENT_MONTH)) {
+                            boolean currentMonthChanged = changeSet.isFieldChanged(CalendarFields.CURRENT_MONTH);
+                            boolean firstDayOfWeekChanged = changeSet.isFieldChanged(CalendarFields.FIRST_DAY_OF_WEEK);
+                            boolean firstSelectedDayChanged = changeSet.isFieldChanged(CalendarFields.FIRST_SELECTED_DAY);
+                            boolean lastSelectedDayChanged = changeSet.isFieldChanged(CalendarFields.LAST_SELECTED_DAY);
+
+                            if (currentMonthChanged) {
                                 onCurrentMonthChanged(calendar.getCurrentMonth());
                             }
-                            if (changeSet.isFieldChanged(CalendarFields.FIRST_DAY_OF_WEEK)) {
+
+                            if (firstDayOfWeekChanged) {
                                 if (weekDaysView != null) {
                                     weekDaysView.onFirstDayOfWeek(calendar.getFirstDayOfWeek());
                                 }
+                            }
+
+                            if (firstDayOfWeekChanged || firstSelectedDayChanged || lastSelectedDayChanged) {
                                 if (calendarView != null) {
                                     calendarView.refreshData();
                                 }
@@ -104,6 +116,36 @@ public class CustomizableCalendarPresenterImpl implements CustomizableCalendarPr
     public void injectWeekDaysView(WeekDaysView weekDaysView) {
         this.weekDaysView = weekDaysView;
         this.weekDaysView.injectViewInteractor(viewInteractor);
+    }
+
+    @Override
+    public List<String> setupWeekDays() {
+        String[] namesOfDays = DateFormatSymbols.getInstance(Locale.getDefault()).getShortWeekdays();
+        int firstDayOfWeek = calendar.getFirstDayOfWeek();
+
+        List<String> weekDays = new ArrayList<>();
+        for (int i = firstDayOfWeek; i < namesOfDays.length; i++) {
+            String nameOfDay = namesOfDays[i];
+            String formattedNameOfDay = getFormattedDayOfDay(nameOfDay);
+            if (formattedNameOfDay != null) {
+                weekDays.add(formattedNameOfDay);
+            }
+        }
+        for (int i = 0; i < firstDayOfWeek; i++) {
+            String nameOfDay = namesOfDays[i];
+            String formattedNameOfDay = getFormattedDayOfDay(nameOfDay);
+            if (formattedNameOfDay != null) {
+                weekDays.add(formattedNameOfDay);
+            }
+        }
+        return weekDays;
+    }
+
+    private String getFormattedDayOfDay(String nameOfDay) {
+        if (!TextUtils.isEmpty(nameOfDay)) {
+            return nameOfDay.substring(0, 1).toUpperCase();
+        }
+        return null;
     }
 
 //    @Override

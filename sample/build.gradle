@@ -29,6 +29,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile 'com.jakewharton:butterknife:8.7.0'
+    annotationProcessor "com.jakewharton:butterknife-compiler:8.7.0"
     compile "io.reactivex.rxjava2:rxjava:2.1.2"
     compile project(':library')
 }

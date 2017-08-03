@@ -37,6 +37,7 @@ dependencies {
     compile 'joda-time:joda-time:2.9.9'
 
     provided "com.jakewharton:butterknife:+"
+    annotationProcessor "com.jakewharton:butterknife-compiler:+"
     provided "io.reactivex.rxjava2:rxjava:+"
     retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.5.1'
 }

@@ -18,15 +18,15 @@ import org.joda.time.DateTime;
 
 import java.util.Locale;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by francescofurlan on 23/06/17.
  */
 
 public class SubView extends RelativeLayout implements com.molo17.customizablecalendar.library.view.SubView {
-    @InjectView(android.R.id.message)
+    @BindView(android.R.id.message)
     TextView monthTxt;
 
     private ViewInteractor viewInteractor;
@@ -57,7 +57,7 @@ public class SubView extends RelativeLayout implements com.molo17.customizableca
         }
 
         LayoutInflater.from(context).inflate(layoutResId, this);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     @Override

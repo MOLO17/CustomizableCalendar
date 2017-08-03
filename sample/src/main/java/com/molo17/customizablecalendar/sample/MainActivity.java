@@ -9,14 +9,14 @@ import com.molo17.customizablecalendar.library.model.Calendar;
 
 import org.joda.time.DateTime;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 
 public class MainActivity extends AppCompatActivity {
 
-    @InjectView(R.id.view_month)
+    @BindView(R.id.view_month)
     CustomizableCalendar customizableCalendar;
 
     private CompositeDisposable subscriptions;
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         subscriptions = new CompositeDisposable();
         updateData();
     }

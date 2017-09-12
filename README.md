@@ -1,9 +1,15 @@
-![](static/Logo.jpg)
+<p align="center">
+  <img align="center" src="static/Logo.jpg"/>
+</p>
 
 # CustomizableCalendar
 
 This library allows you to create a completely customizable calendar.
 <br> You can use `CustomizableCalendar` to create your calendar, customizing UI and behaviour.
+
+<p align="center">
+  <img align="center" src="static/CalendarPreview2.png"/>
+</p>
 
 # Features
 
@@ -183,8 +189,9 @@ An example of a custom layout is the following:
 * `@android:id/text2` for **SubView**;
 * `@android:id/content` for **CalendarRecyclerView**;
 
-![](static/CalendarPreview1.png)
-![](static/CalendarPreview2.png)
+<p align="center">
+  <img align="center" src="static/CalendarPreview1.png"/>
+</p>
 
 #### HeaderView
 
@@ -272,3 +279,7 @@ Here are listed all of the methods with a small description:
 <br> Here you can create your customized `MonthGridView`.
 <br> You should return a `MonthGridView`.
 <br> This method is called in the `onCreateViewHolder` method of `CalendarViewAdapter`.
+
+Getting Help
+------------
+To report a specific problem or feature request, ![open a new issue here on Github](https://github.com/MOLO17/CustomizableCalendar/issues/new). For questions, suggestions, or anything else, email us at helpdesk@molo17.com.

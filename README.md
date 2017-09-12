@@ -89,28 +89,28 @@ protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
   ButterKnife.bind(this);
-  
+
   DateTime today = new DateTime();
-  
+
   // setting up first and last month that must be showed in the calendar
   DateTime firstMonth = today.withDayOfMonth(1);
   DateTime lastMonth = today.plusMonths(3).withDayOfMonth(1);
-  
+
   // create the Calendar obj and setting it up with some configs like:
   // - first selected day
   // - last selected day
   // - multiple selection
-  
+
   final Calendar calendar = new Calendar(firstMonth, lastMonth);
   calendar.setFirstSelectedDay(today.plusDays(4));
-  
+
   // if you don't want the multiple selection mode just skip the 2 lines below
   calendar.setLastSelectedDay(today.plusDays(6));
   calendar.setMultipleSelection(true);
-  
+
   // create a ViewInteractor obj needed to interact with the CustomizableCalendar
   final YourViewInteractorClass calendarViewInteractor = new YourViewInteractorClass();
-  
+
   // create an AUCalendar object (a Calendar wrapper that operates as a singleton and provides all the updates)
   AUCalendar auCalendar = AUCalendar.getInstance(calendar);
 
@@ -127,7 +127,7 @@ protected void onCreate(Bundle savedInstanceState) {
       }
     })
   );
-  
+
   // injecting the ViewInteractor to the CustomizableCalendar View
   customizableCalendar.injectViewInteractor(calendarViewInteractor)
 }
@@ -275,6 +275,15 @@ Here are listed all of the methods with a small description:
 * `boolean hasImplementedSelection()`
 <br> Here you should return `true` if you have implemented the above method (`setSelected`).
 <br> This method is called in the `setSelected` method of `MonthAdapter`.
+
+* `String formatWeekDayName(String nameOfDay);`
+<br> Here you can format the name of the week day.
+<br> This method is called after `injectViewInteractor` method of `WeekDaysView`.
+<br> You should return the formatted name of the week day.
+
+* `boolean hasImplementedWeekDayNameFormat()`
+<br> Here you should return `true` if you have implemented the above method (`formatWeekDayName`).
+<br> This method is called after `injectViewInteractor` method of `WeekDaysView`.
 
 * `View getMonthGridView(View rootView)`
 <br> Here you can create your customized `MonthGridView`.

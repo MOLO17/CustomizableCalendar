@@ -143,7 +143,11 @@ public class CustomizableCalendarPresenterImpl implements CustomizableCalendarPr
 
     private String getFormattedDayOfDay(String nameOfDay) {
         if (!TextUtils.isEmpty(nameOfDay)) {
-            return nameOfDay.substring(0, 1).toUpperCase();
+            if (viewInteractor.hasImplementedWeekDayNameFormat()) {
+                return viewInteractor.formatWeekDayName(nameOfDay);
+            } else {
+                return nameOfDay.substring(0, 1).toUpperCase();
+            }
         }
         return null;
     }

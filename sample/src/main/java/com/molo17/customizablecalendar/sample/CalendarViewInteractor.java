@@ -103,6 +103,16 @@ public class CalendarViewInteractor implements ViewInteractor {
         return null;
     }
 
+    @Override
+    public boolean hasImplementedWeekDayNameFormat() {
+        return false;
+    }
+
+    @Override
+    public String formatWeekDayName(String nameOfDay) {
+        return null;
+    }
+
     void updateCalendar(Calendar calendar) {
         this.calendar = calendar;
         if (firstDaySelectedTxt != null && lastDaySelectedTxt != null) {

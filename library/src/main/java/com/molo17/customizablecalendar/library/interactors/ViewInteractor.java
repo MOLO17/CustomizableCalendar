@@ -42,4 +42,8 @@ public interface ViewInteractor {
     boolean hasImplementedMonthCellBinding();
 
     View getMonthGridView(View rootView);
+
+    boolean hasImplementedWeekDayNameFormat();
+
+    String formatWeekDayName(String nameOfDay);
 }

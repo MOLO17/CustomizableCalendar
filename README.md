@@ -1,3 +1,5 @@
+![https://raw.githubusercontent.com/MOLO17/CustomizableCalendar/master/static/Logo.jpg]()
+
 # CustomizableCalendar
 
 This library allows you to create a completely customizable calendar.
@@ -181,7 +183,8 @@ An example of a custom layout is the following:
 * `@android:id/text2` for **SubView**;
 * `@android:id/content` for **CalendarRecyclerView**;
 
-<img src="http://i.imgur.com/0tFPTHd.png" width="400">
+![https://github.com/MOLO17/CustomizableCalendar/blob/master/static/CalendarPreview1.png?raw=true]()
+![https://github.com/MOLO17/CustomizableCalendar/blob/master/static/CalendarPreview2.png?raw=true]()
 
 #### HeaderView
 

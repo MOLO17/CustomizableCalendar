@@ -2,6 +2,7 @@
   <img align="center" src="static/Logo.jpg"/>
 </p>
 
+
 # CustomizableCalendar
 
 This library allows you to create a completely customizable calendar.

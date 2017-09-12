@@ -1,4 +1,4 @@
-![https://raw.githubusercontent.com/MOLO17/CustomizableCalendar/master/static/Logo.jpg]()
+![](static/Logo.jpg)
 
 # CustomizableCalendar
 
@@ -183,8 +183,8 @@ An example of a custom layout is the following:
 * `@android:id/text2` for **SubView**;
 * `@android:id/content` for **CalendarRecyclerView**;
 
-![https://github.com/MOLO17/CustomizableCalendar/blob/master/static/CalendarPreview1.png?raw=true]()
-![https://github.com/MOLO17/CustomizableCalendar/blob/master/static/CalendarPreview2.png?raw=true]()
+![](static/CalendarPreview1.png)
+![](static/CalendarPreview2.png)
 
 #### HeaderView
 

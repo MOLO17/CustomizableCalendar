@@ -23,7 +23,6 @@ import org.joda.time.DateTime;
  */
 
 public class CalendarRecyclerView extends RecyclerView implements CalendarView {
-    private LinearLayoutManager linearLayoutManager;
     private CalendarViewAdapter calendarViewAdapter;
     private ViewInteractor viewInteractor;
     private Context context;
@@ -59,7 +58,7 @@ public class CalendarRecyclerView extends RecyclerView implements CalendarView {
             typedArray.recycle();
         }
 
-        linearLayoutManager = new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         setLayoutManager(linearLayoutManager);
         this.calendar = AUCalendar.getInstance();
@@ -122,7 +121,7 @@ public class CalendarRecyclerView extends RecyclerView implements CalendarView {
                 super.onScrollStateChanged(recyclerView, newState);
                 switch (newState) {
                     case SCROLL_STATE_IDLE: {
-                        View view = snapHelper.findSnapView(linearLayoutManager);
+                        View view = snapHelper.findSnapView(getLayoutManager());
                         if (view != null) {
                             int currentPosition = getChildAdapterPosition(view);
                             DateTime currentMonth = calendar.getMonths().get(currentPosition);

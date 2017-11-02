@@ -63,7 +63,7 @@ Add CustomizableCalendar to your layout
 <com.molo17.customizablecalendar.library.components.CustomizableCalendar
         android:id="@+id/customizable_calendar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content />
+        android:layout_height="wrap_content" />
 ```
 
 ### Java

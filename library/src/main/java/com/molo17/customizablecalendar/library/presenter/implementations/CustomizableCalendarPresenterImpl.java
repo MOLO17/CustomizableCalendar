@@ -89,7 +89,7 @@ public class CustomizableCalendarPresenterImpl implements CustomizableCalendarPr
     private void onCurrentMonthChanged(DateTime currentMonth) {
         String month = currentMonth.toString("MMMMM", Locale.getDefault());
         if (view != null && !TextUtils.isEmpty(month)) {
-            String formattedMonth = month.substring(0, 1).toUpperCase() + month.substring(1);
+            String formattedMonth = month.substring(0, 1).toUpperCase(Locale.getDefault()) + month.substring(1);
             view.onCurrentMonthChanged(formattedMonth);
         }
     }
@@ -146,7 +146,7 @@ public class CustomizableCalendarPresenterImpl implements CustomizableCalendarPr
             if (viewInteractor.hasImplementedWeekDayNameFormat()) {
                 return viewInteractor.formatWeekDayName(nameOfDay);
             } else {
-                return nameOfDay.substring(0, 1).toUpperCase();
+                return nameOfDay.substring(0, 1).toUpperCase(Locale.getDefault());
             }
         }
         return null;

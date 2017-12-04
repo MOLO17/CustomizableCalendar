@@ -67,7 +67,7 @@ public class WeekDaysViewAdapter extends RecyclerView.Adapter<WeekDaysViewAdapte
 
         public WeekDayVH(View itemView) {
             super(itemView);
-            weekDayTxt = (TextView) itemView.findViewById(android.R.id.summary);
+            weekDayTxt = itemView.findViewById(android.R.id.summary);
             itemView.setOnClickListener(this);
         }
 

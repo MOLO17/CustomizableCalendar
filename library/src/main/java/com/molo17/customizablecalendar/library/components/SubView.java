@@ -79,7 +79,7 @@ public class SubView extends RelativeLayout implements com.molo17.customizableca
         DateTime firstMonth = AUCalendar.getInstance().getFirstMonth();
         String month = firstMonth.toString("MMMMM", Locale.getDefault());
         if (!TextUtils.isEmpty(month)) {
-            String formattedMonth = month.substring(0, 1).toUpperCase() + month.substring(1);
+            String formattedMonth = month.substring(0, 1).toUpperCase(Locale.getDefault()) + month.substring(1);
             onMonthChanged(formattedMonth);
         }
     }

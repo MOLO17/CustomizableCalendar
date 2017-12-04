@@ -100,7 +100,7 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
         if (viewInteractor != null && viewInteractor.hasImplementedMonthCellBinding()) {
             view = viewInteractor.onMonthCellBindView(view, currentItem);
         } else {
-            final TextView dayView = (TextView) view.findViewById(android.R.id.title);
+            final TextView dayView = view.findViewById(android.R.id.title);
             final View background = view.findViewById(android.R.id.background);
             final View startSelectionView = view.findViewById(android.R.id.startSelectingText);
             final View endSelectionView = view.findViewById(android.R.id.stopSelectingText);

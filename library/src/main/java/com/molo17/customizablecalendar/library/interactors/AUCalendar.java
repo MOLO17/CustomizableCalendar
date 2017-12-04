@@ -177,11 +177,11 @@ public class AUCalendar {
 
         @Override
         public String toString() {
-            String fieldChanges = "";
+            StringBuilder fieldChanges = new StringBuilder();
             for (String fieldChanged : changedFields) {
-                fieldChanges += " " + fieldChanged;
+                fieldChanges.append(" ").append(fieldChanged);
             }
-            return fieldChanges;
+            return fieldChanges.toString();
         }
     }
 }

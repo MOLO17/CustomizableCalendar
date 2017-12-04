@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="#fff">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff">
 
     <View
         android:id="@android:id/background"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/empty_circle" />
+        android:background="@drawable/empty_circle"/>
 
     <View
         android:id="@android:id/startSelectingText"
@@ -18,7 +18,7 @@
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:background="@color/blue"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
     <View
         android:id="@android:id/stopSelectingText"
@@ -27,7 +27,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:background="@color/blue"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
     <TextView
         android:id="@android:id/title"
@@ -35,6 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        android:textSize="18sp"/>
 
 </RelativeLayout>

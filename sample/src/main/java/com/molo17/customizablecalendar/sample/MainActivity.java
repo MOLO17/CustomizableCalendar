@@ -12,7 +12,6 @@ import org.joda.time.DateTime;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,12 +50,8 @@ public class MainActivity extends AppCompatActivity {
         AUCalendar auCalendar = AUCalendar.getInstance(calendar);
         calendarViewInteractor.updateCalendar(calendar);
         subscriptions.add(
-                auCalendar.observeChangesOnCalendar().subscribe(new Consumer<AUCalendar.ChangeSet>() {
-                    @Override
-                    public void accept(AUCalendar.ChangeSet changeSet) throws Exception {
-                        calendarViewInteractor.updateCalendar(calendar);
-                    }
-                })
+                auCalendar.observeChangesOnCalendar()
+                        .subscribe(changeSet -> calendarViewInteractor.updateCalendar(calendar))
         );
 
         // inject (set) the calendarViewInteractor to the CustomizableCalendar

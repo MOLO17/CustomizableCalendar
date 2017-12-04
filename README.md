@@ -47,9 +47,9 @@ dependencies {
 
 * RecyclerView
 * [Joda-Time](https://github.com/JodaOrg/joda-time)
-* [ButterKnife](https://github.com/JakeWharton/butterknife)
 * [RxJava2](https://github.com/ReactiveX/RxJava)
-* [Retrolambda](https://github.com/orfjackal/retrolambda)
+* ~[ButterKnife](https://github.com/JakeWharton/butterknife)~ used on version <= 0.1.3
+* ~[Retrolambda](https://github.com/orfjackal/retrolambda)~ used on version <= 0.1.3
 
 # Usage
 

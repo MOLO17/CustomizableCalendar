@@ -13,25 +13,18 @@ import com.molo17.customizablecalendar.library.presenter.implementations.Customi
 import com.molo17.customizablecalendar.library.presenter.interfeaces.CustomizableCalendarPresenter;
 import com.molo17.customizablecalendar.library.view.CustomizableCalendarView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created by francescofurlan on 23/06/17.
  */
 
 public class CustomizableCalendar extends LinearLayout implements CustomizableCalendarView {
 
-    @BindView(android.R.id.primary)
     HeaderView headerView;
 
-    @BindView(android.R.id.text1)
     WeekDaysView weekDaysView;
 
-    @BindView(android.R.id.text2)
     SubView subView;
 
-    @BindView(android.R.id.content)
     CalendarRecyclerView calendarRecyclerView;
 
     CustomizableCalendarPresenter presenter;
@@ -63,7 +56,10 @@ public class CustomizableCalendar extends LinearLayout implements CustomizableCa
             }
 
             LayoutInflater.from(context).inflate(layoutResId, this);
-            ButterKnife.bind(this);
+            headerView = (HeaderView) findViewById(android.R.id.primary);
+            weekDaysView = (WeekDaysView) findViewById(android.R.id.text1);
+            subView = (SubView) findViewById(android.R.id.text2);
+            calendarRecyclerView = (CalendarRecyclerView) findViewById(android.R.id.content);
         }
     }
 

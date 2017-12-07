@@ -39,7 +39,7 @@ allprojects {
 
 ```gradle
 dependencies {
-  compile 'com.github.MOLO17:CustomizableCalendar:v0.1.2'
+  compile 'com.github.MOLO17:CustomizableCalendar:v0.1.4'
 }
 ```
 

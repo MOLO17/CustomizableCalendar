@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Created by francescofurlan on 23/06/17.
@@ -35,7 +34,6 @@ public class CustomizableCalendarPresenterImpl implements CustomizableCalendarPr
     private WeekDaysView weekDaysView;
     private ViewInteractor viewInteractor;
     private CustomizableCalendarView view;
-    private CompositeDisposable subscriptions = new CompositeDisposable();
 
     @Override
     public void injectViewInteractor(ViewInteractor viewInteractor) {
@@ -54,31 +52,28 @@ public class CustomizableCalendarPresenterImpl implements CustomizableCalendarPr
             view.injectViewInteractor(viewInteractor);
         }
         calendar = AUCalendar.getInstance();
-        subscriptions.add(
-                calendar.observeChangesOnCalendar()
-                        .subscribe(changeSet -> {
-                            boolean currentMonthChanged = changeSet.isFieldChanged(CalendarFields.CURRENT_MONTH);
-                            boolean firstDayOfWeekChanged = changeSet.isFieldChanged(CalendarFields.FIRST_DAY_OF_WEEK);
-                            boolean firstSelectedDayChanged = changeSet.isFieldChanged(CalendarFields.FIRST_SELECTED_DAY);
-                            boolean lastSelectedDayChanged = changeSet.isFieldChanged(CalendarFields.LAST_SELECTED_DAY);
+        calendar.addChangeListener(changeSet -> {
+            boolean currentMonthChanged = changeSet.isFieldChanged(CalendarFields.CURRENT_MONTH);
+            boolean firstDayOfWeekChanged = changeSet.isFieldChanged(CalendarFields.FIRST_DAY_OF_WEEK);
+            boolean firstSelectedDayChanged = changeSet.isFieldChanged(CalendarFields.FIRST_SELECTED_DAY);
+            boolean lastSelectedDayChanged = changeSet.isFieldChanged(CalendarFields.LAST_SELECTED_DAY);
 
-                            if (currentMonthChanged) {
-                                onCurrentMonthChanged(calendar.getCurrentMonth());
-                            }
+            if (currentMonthChanged) {
+                onCurrentMonthChanged(calendar.getCurrentMonth());
+            }
 
-                            if (firstDayOfWeekChanged) {
-                                if (weekDaysView != null) {
-                                    weekDaysView.onFirstDayOfWeek(calendar.getFirstDayOfWeek());
-                                }
-                            }
+            if (firstDayOfWeekChanged) {
+                if (weekDaysView != null) {
+                    weekDaysView.onFirstDayOfWeek(calendar.getFirstDayOfWeek());
+                }
+            }
 
-                            if (firstDayOfWeekChanged || firstSelectedDayChanged || lastSelectedDayChanged) {
-                                if (calendarView != null) {
-                                    calendarView.refreshData();
-                                }
-                            }
-                        })
-        );
+            if (firstDayOfWeekChanged || firstSelectedDayChanged || lastSelectedDayChanged) {
+                if (calendarView != null) {
+                    calendarView.refreshData();
+                }
+            }
+        });
     }
 
     @Override

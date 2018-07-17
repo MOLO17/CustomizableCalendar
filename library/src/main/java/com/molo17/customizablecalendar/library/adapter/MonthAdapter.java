@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Created by francescofurlan on 23/06/17.
@@ -43,12 +42,10 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
     private boolean multipleSelection;
     private int firstDayOfWeek;
 
-    private CompositeDisposable subscriptions;
     private boolean subscribed;
 
     public MonthAdapter(Context context, DateTime currentMonth) {
         this.context = context;
-        this.subscriptions = new CompositeDisposable();
         this.calendar = AUCalendar.getInstance();
         this.layoutResId = R.layout.calendar_cell;
         this.currentMonth = currentMonth.withDayOfMonth(1).withMillisOfDay(0);
@@ -282,17 +279,7 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
 
     public void subscribe() {
         if (!subscribed) {
-            subscriptions.add(
-                    calendar.observeChangesOnCalendar()
-                            .subscribe(changeSet -> {
-                                if (changeSet.isFieldChanged(CalendarFields.FIRST_DAY_OF_WEEK)
-                                        || changeSet.isFieldChanged(CalendarFields.FIRST_SELECTED_DAY)
-                                        || changeSet.isFieldChanged(CalendarFields.LAST_SELECTED_DAY)) {
-                                    initFromCalendar();
-                                    refreshDays();
-                                }
-                            })
-            );
+            calendar.addChangeListener(changeListener);
             subscribed = true;
         }
     }
@@ -300,8 +287,17 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
     @Override
     public void unsubscribe() {
         if (subscribed) {
-            subscriptions.clear();
+            calendar.removeChangeListener(changeListener);
             subscribed = false;
         }
     }
+
+    private final AUCalendar.CalendarObjectChangeListener changeListener = changeSet -> {
+        if (changeSet.isFieldChanged(CalendarFields.FIRST_DAY_OF_WEEK)
+                || changeSet.isFieldChanged(CalendarFields.FIRST_SELECTED_DAY)
+                || changeSet.isFieldChanged(CalendarFields.LAST_SELECTED_DAY)) {
+            initFromCalendar();
+            refreshDays();
+        }
+    };
 }

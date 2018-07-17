@@ -8,14 +8,10 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.BackpressureStrategy;
-import io.reactivex.Flowable;
-import io.reactivex.FlowableEmitter;
 
 /**
  * Created by francescofurlan on 30/06/17.
  */
-
 public class AUCalendar {
     private static AUCalendar AUCalendarInstance;
     private Calendar calendar;
@@ -48,19 +44,11 @@ public class AUCalendar {
         this.calendar = calendar;
     }
 
-    public Flowable<ChangeSet> observeChangesOnCalendar() {
-        return Flowable.create((FlowableEmitter<ChangeSet> emitter) -> {
-            CalendarObjectChangeListener objectChangeListener = emitter::onNext;
-            addChangeListener(objectChangeListener);
-            emitter.setCancellable(() -> removeChangeListener(objectChangeListener));
-        }, BackpressureStrategy.BUFFER);
-    }
-
-    private void addChangeListener(CalendarObjectChangeListener objectChangeListener) {
+    public void addChangeListener(CalendarObjectChangeListener objectChangeListener) {
         onChangeListenerList.add(objectChangeListener);
     }
 
-    private void removeChangeListener(CalendarObjectChangeListener objectChangeListener) {
+    public void removeChangeListener(CalendarObjectChangeListener objectChangeListener) {
         onChangeListenerList.remove(objectChangeListener);
     }
 

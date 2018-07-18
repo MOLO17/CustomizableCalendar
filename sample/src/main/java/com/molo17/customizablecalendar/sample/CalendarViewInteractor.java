@@ -1,6 +1,7 @@
 package com.molo17.customizablecalendar.sample;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 
@@ -19,6 +20,7 @@ import com.molo17.customizablecalendar.library.model.CalendarItem;
 
 
 import org.threeten.bp.LocalDate;
+import org.threeten.bp.Month;
 import org.threeten.bp.format.DateTimeFormatter;
 
 import java.util.List;
@@ -89,6 +91,22 @@ public class CalendarViewInteractor implements ViewInteractor {
                 AUCalendar.getInstance().setCurrentMonth(currentMonth.plusMonths(1));
             }
         });
+    }
+
+    public void scrollToCurrentMonth() {
+        new Handler().postDelayed(() -> {
+            LocalDate currentMonth = calendar.getCurrentMonth();
+            if (calendarRecyclerView != null && currentMonth != null) {
+                LinearLayoutManager layoutManager = (LinearLayoutManager)calendarRecyclerView.getLayoutManager();
+
+                for (int position = 0; position < calendar.getMonths().size(); position++) {
+                    if (calendar.getMonths().get(position).compareTo(currentMonth) == 0) {
+                        layoutManager.scrollToPosition(position);
+                        break;
+                    }
+                }
+            }
+        }, 300);
     }
 
     @Override

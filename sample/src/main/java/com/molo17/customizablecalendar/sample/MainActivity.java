@@ -52,5 +52,8 @@ public class MainActivity extends AppCompatActivity {
         });
         // inject (set) the calendarViewInteractor to the CustomizableCalendar
         customizableCalendar.injectViewInteractor(calendarViewInteractor);
+
+        auCalendar.setCurrentMonth(LocalDate.now().withDayOfMonth(1));
+        calendarViewInteractor.scrollToCurrentMonth();
     }
 }

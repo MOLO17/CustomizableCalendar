@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         // - last selected day
         // - multiple selection
         final Calendar calendar = new Calendar(firstMonth, lastMonth);
-        calendar.setFirstSelectedDay(LocalDate.now());
-        calendar.setLastSelectedDay(LocalDate.now());
+//        calendar.setFirstSelectedDay(LocalDate.now());
+//        calendar.setLastSelectedDay(LocalDate.now());
         calendar.setMultipleSelection(true);
 
         CustomizableCalendar customizableCalendar = findViewById(R.id.view_month);

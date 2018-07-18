@@ -190,12 +190,11 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
     @Override
     public void setSelected(LocalDate dateSelected) {
         LocalDate firstSelectedDay = calendar.getFirstSelectedDay();
-        LocalDate lastSelectedDay = calendar.getLastSelectedDay();
 
         if (firstSelectedDay == null) {
             notifyFirstSelectionUpdated(dateSelected);
-        } else if (lastSelectedDay == null) {
             notifyLastSelectionUpdated(dateSelected);
+            calendar.setSelectStarted(true);
         } else {
             if (!calendar.isSelectStarted()) {
                 notifyFirstSelectionUpdated(dateSelected);

@@ -137,7 +137,12 @@ public class CalendarViewInteractor implements ViewInteractor {
             dayView.setText(null);
         } else  {
             dayView.setText(currentItem.getDayString());
-            dayView.setTextColor(ContextCompat.getColor(context, R.color.black));
+
+            if (currentItem.getDateTime().compareTo(LocalDate.now()) == 0) {
+                dayView.setTextColor(ContextCompat.getColor(context, R.color.red));
+            } else {
+                dayView.setTextColor(ContextCompat.getColor(context, R.color.black));
+            }
 
             currentItem.setSelectable(true);
 

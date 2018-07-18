@@ -177,6 +177,7 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
     public void injectPresenter(CustomizableCalendarPresenter presenter) {
     }
 
+
     /**
      * Select the day specified if multiple selection mode is not enabled,
      * otherwise adjust the ends of the selection:
@@ -188,7 +189,31 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
      */
     @Override
     public void setSelected(LocalDate dateSelected) {
-        if (viewInteractor != null && viewInteractor.hasImplementedSelection()) {
+        LocalDate firstSelectedDay = calendar.getFirstSelectedDay();
+        LocalDate lastSelectedDay = calendar.getLastSelectedDay();
+
+        if (firstSelectedDay == null) {
+            notifyFirstSelectionUpdated(dateSelected);
+        } else if (lastSelectedDay == null) {
+            notifyLastSelectionUpdated(dateSelected);
+        } else {
+            if (!calendar.isSelectStarted()) {
+                notifyFirstSelectionUpdated(dateSelected);
+                notifyLastSelectionUpdated(dateSelected);
+                calendar.setSelectStarted(true);
+            } else {
+                if (dateSelected.compareTo(firstSelectedDay) < 0) {
+                    notifyFirstSelectionUpdated(dateSelected);
+                    notifyLastSelectionUpdated(firstSelectedDay);
+                } else {
+                    notifyLastSelectionUpdated(dateSelected);
+                }
+                calendar.setSelectStarted(false);
+            }
+        }
+
+
+      /*  if (viewInteractor != null && viewInteractor.hasImplementedSelection()) {
             int itemSelected = viewInteractor.setSelected(multipleSelection, dateSelected);
             switch (itemSelected) {
                 case 0:
@@ -220,7 +245,7 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
                     notifyFirstSelectionUpdated(dateSelected);
                 }
             }
-        }
+        }*/
         notifyDataSetChanged();
     }
 

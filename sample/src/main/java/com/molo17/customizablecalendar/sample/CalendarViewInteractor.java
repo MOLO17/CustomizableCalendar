@@ -170,13 +170,7 @@ public class CalendarViewInteractor implements ViewInteractor {
 
     @Override
     public int setSelected(boolean multipleSelection, LocalDate dateSelected) {
-//        DateTime firstSelectedDay = calendar.getFirstSelectedDay();
-//        DateTime lastSelectedDay = calendar.getLastSelectedDay();
-//
-//        if (firstSelectedDay == null) {
-//            return 0;
-//        }
-        return -1; // сбросить lastSelectedDay
+        return -1;
     }
 
     @Override

@@ -16,6 +16,7 @@ public class AUCalendar {
     private static AUCalendar AUCalendarInstance;
     private Calendar calendar;
     private List<CalendarObjectChangeListener> onChangeListenerList = new ArrayList<>();
+    private boolean selectStarted;
 
     public static AUCalendar getInstance() {
         if (AUCalendarInstance == null) {
@@ -128,6 +129,14 @@ public class AUCalendar {
             calendar.setFirstDayOfWeek(firstDayOfWeek);
             emitOnChange(CalendarFields.FIRST_DAY_OF_WEEK);
         }
+    }
+
+    public boolean isSelectStarted() {
+        return selectStarted;
+    }
+
+    public void setSelectStarted(boolean selectStarted) {
+        this.selectStarted = selectStarted;
     }
 
     public interface ChangeSet {

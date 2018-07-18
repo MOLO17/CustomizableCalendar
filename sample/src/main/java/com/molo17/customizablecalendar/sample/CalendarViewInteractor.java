@@ -2,6 +2,8 @@ package com.molo17.customizablecalendar.sample;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.molo17.customizablecalendar.library.adapter.WeekDaysViewAdapter;
+import com.molo17.customizablecalendar.library.components.CalendarRecyclerView;
 import com.molo17.customizablecalendar.library.interactors.AUCalendar;
 import com.molo17.customizablecalendar.library.interactors.ViewInteractor;
 import com.molo17.customizablecalendar.library.model.Calendar;
@@ -16,11 +19,9 @@ import com.molo17.customizablecalendar.library.model.CalendarItem;
 
 
 import org.threeten.bp.LocalDate;
-import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by francescofurlan on 03/07/17.
@@ -31,6 +32,7 @@ public class CalendarViewInteractor implements ViewInteractor {
     private Calendar calendar;
     private TextView firstDaySelectedTxt;
     private TextView lastDaySelectedTxt;
+    private CalendarRecyclerView calendarRecyclerView;
 
     CalendarViewInteractor(Context context) {
         this.context = context;
@@ -38,7 +40,6 @@ public class CalendarViewInteractor implements ViewInteractor {
 
     @Override
     public void onCustomizableCalendarBindView(View view) {
-
     }
 
     @Override
@@ -51,12 +52,14 @@ public class CalendarViewInteractor implements ViewInteractor {
 
     @Override
     public void onWeekDaysBindView(View view) {
-
+        int x = 0;
+        x++;
     }
 
     @Override
     public void onWeekDayBindView(WeekDaysViewAdapter.WeekDayVH holder, String weekDay) {
-
+        int x = 0;
+        x++;
     }
 
     @Override
@@ -65,16 +68,38 @@ public class CalendarViewInteractor implements ViewInteractor {
         String text = DateTimeFormatter.ofPattern("MMMM yyyy").format(currentMonth);
         ((TextView)view.findViewById(android.R.id.message)).setText(text);
 
-        view.findViewById(R.id.prevIcon).setOnClickListener(v -> AUCalendar.getInstance().setCurrentMonth(currentMonth.minusMonths(1)));
-        view.findViewById(R.id.nextIcon).setOnClickListener(v -> AUCalendar.getInstance().setCurrentMonth(currentMonth.plusMonths(1)));
+        view.findViewById(R.id.prevIcon).setOnClickListener(v -> {
+            LinearLayoutManager layoutManager = (LinearLayoutManager)calendarRecyclerView.getLayoutManager();
+            int position = layoutManager.findFirstCompletelyVisibleItemPosition();
+
+            LocalDate currentMonth1 = calendar.getCurrentMonth();
+            if (currentMonth1.compareTo(calendar.getFirstMonth()) > 0) {
+                layoutManager.scrollToPosition(position - 1);
+                AUCalendar.getInstance().setCurrentMonth(currentMonth.minusMonths(1));
+            }
+        });
+        view.findViewById(R.id.nextIcon).setOnClickListener(v -> {
+            LinearLayoutManager layoutManager = (LinearLayoutManager)calendarRecyclerView.getLayoutManager();
+            int position = layoutManager.findFirstCompletelyVisibleItemPosition();
+
+            LocalDate currentMonth1 = calendar.getCurrentMonth();
+            LocalDate lastMonth = calendar.getMonths().get(calendar.getMonths().size() - 1);
+            if (currentMonth1.compareTo(lastMonth) < 0) {
+                layoutManager.scrollToPosition(position + 1);
+                AUCalendar.getInstance().setCurrentMonth(currentMonth.plusMonths(1));
+            }
+        });
     }
 
     @Override
     public void onCalendarBindView(View view) {
+        calendarRecyclerView = (CalendarRecyclerView) view;
     }
 
     @Override
     public void onMonthBindView(View view) {
+        int x = 0;
+        x++;
     }
 
     @Override

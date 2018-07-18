@@ -25,15 +25,13 @@ public class Calendar {
         this.firstMonth = firstMonth;
         this.firstDayOfWeek = java.util.Calendar.getInstance(Locale.getDefault()).getFirstDayOfWeek();
 
-        LocalDate startMonth = firstMonth.plusMonths(1);
         int monthsBetweenCount = Period.between(firstMonth, lastMonth).getMonths();
 
         months = new ArrayList<>();
 
-        months.add(firstMonth);
         currentMonth = firstMonth;
 
-        LocalDate monthToAdd = LocalDate.of(startMonth.getYear(), startMonth.getMonth(), 1);
+        LocalDate monthToAdd = LocalDate.of(firstMonth.getYear(), firstMonth.getMonth(), 1);
         for (int i = 0; i <= monthsBetweenCount; i++) {
             months.add(monthToAdd);
             monthToAdd = monthToAdd.plusMonths(1);

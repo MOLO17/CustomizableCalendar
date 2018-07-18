@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import com.molo17.customizablecalendar.library.adapter.WeekDaysViewAdapter;
 import com.molo17.customizablecalendar.library.model.CalendarItem;
 
-import org.joda.time.DateTime;
+import org.threeten.bp.LocalDate;
 
 import java.util.List;
 
@@ -37,7 +37,7 @@ public interface ViewInteractor {
 
     boolean hasImplementedSelection();
 
-    int setSelected(boolean multipleSelection, DateTime dateSelected);
+    int setSelected(boolean multipleSelection, LocalDate dateSelected);
 
     boolean hasImplementedMonthCellBinding();
 

@@ -18,7 +18,7 @@ import com.molo17.customizablecalendar.library.presenter.interfeaces.Customizabl
 import com.molo17.customizablecalendar.library.utils.DateUtils;
 import com.molo17.customizablecalendar.library.view.MonthView;
 
-import org.joda.time.DateTime;
+import org.threeten.bp.LocalDate;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,32 +36,26 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
     private List<CalendarItem> days;
     private ViewInteractor viewInteractor;
 
-    private DateTime currentMonth;
-    private DateTime firstSelectedDay;
-    private DateTime lastSelectedDay;
+    private LocalDate currentMonth;
+    private LocalDate firstSelectedDay;
+    private LocalDate lastSelectedDay;
     private boolean multipleSelection;
     private int firstDayOfWeek;
 
     private boolean subscribed;
 
-    public MonthAdapter(Context context, DateTime currentMonth) {
+    public MonthAdapter(Context context, LocalDate currentMonth) {
         this.context = context;
         this.calendar = AUCalendar.getInstance();
         this.layoutResId = R.layout.calendar_cell;
-        this.currentMonth = currentMonth.withDayOfMonth(1).withMillisOfDay(0);
+        this.currentMonth = currentMonth.withDayOfMonth(1);
         initFromCalendar();
         subscribe();
     }
 
     private void initFromCalendar() {
         firstSelectedDay = calendar.getFirstSelectedDay();
-        if (firstSelectedDay != null) {
-            firstSelectedDay = firstSelectedDay.withMillisOfDay(0);
-        }
         lastSelectedDay = calendar.getLastSelectedDay();
-        if (lastSelectedDay != null) {
-            lastSelectedDay = lastSelectedDay.withMillisOfDay(0);
-        }
         multipleSelection = calendar.isMultipleSelectionEnabled();
         firstDayOfWeek = calendar.getFirstDayOfWeek();
     }
@@ -108,7 +102,7 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
             if (currentItem == null) {
                 background.setBackground(null);
                 dayView.setText(null);
-            } else if (currentItem.compareTo(calendar.getFirstMonth().withMillisOfDay(0)) < 0) {
+            } else if (currentItem.compareTo(calendar.getFirstMonth()) < 0) {
                 currentItem.setSelectable(false);
                 background.setBackground(null);
                 dayView.setTextColor(Color.BLACK);
@@ -193,7 +187,7 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
      *                     should be selected
      */
     @Override
-    public void setSelected(DateTime dateSelected) {
+    public void setSelected(LocalDate dateSelected) {
         if (viewInteractor != null && viewInteractor.hasImplementedSelection()) {
             int itemSelected = viewInteractor.setSelected(multipleSelection, dateSelected);
             switch (itemSelected) {
@@ -230,12 +224,12 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
         notifyDataSetChanged();
     }
 
-    private void notifyFirstSelectionUpdated(DateTime startSelected) {
+    private void notifyFirstSelectionUpdated(LocalDate startSelected) {
         this.firstSelectedDay = startSelected;
         this.calendar.setFirstSelectedDay(startSelected);
     }
 
-    private void notifyLastSelectionUpdated(DateTime endSelected) {
+    private void notifyLastSelectionUpdated(LocalDate endSelected) {
         this.lastSelectedDay = endSelected;
         this.calendar.setLastSelectedDay(endSelected);
     }
@@ -244,8 +238,8 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
     public final void refreshDays() {
         final int empties;
         final int year = currentMonth.getYear();
-        final int month = currentMonth.getMonthOfYear();
-        final int firstDayOfMonth = currentMonth.getDayOfWeek() + 1;
+        final int month = currentMonth.getMonthValue();
+        final int firstDayOfMonth = currentMonth.getDayOfWeek().getValue() + 1;
         final int lastDayOfMonth = DateUtils.getDaysInMonth(month - 1, year);
         List<CalendarItem> updatedDays = new ArrayList<>();
 

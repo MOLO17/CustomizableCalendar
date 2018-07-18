@@ -14,7 +14,9 @@ import com.molo17.customizablecalendar.library.view.HeaderView;
 import com.molo17.customizablecalendar.library.view.SubView;
 import com.molo17.customizablecalendar.library.view.WeekDaysView;
 
-import org.joda.time.DateTime;
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
 
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
@@ -81,8 +83,8 @@ public class CustomizableCalendarPresenterImpl implements CustomizableCalendarPr
         viewInteractor.onCustomizableCalendarBindView(rootView);
     }
 
-    private void onCurrentMonthChanged(DateTime currentMonth) {
-        String month = currentMonth.toString("MMMMM", Locale.getDefault());
+    private void onCurrentMonthChanged(LocalDate currentMonth) {
+        String month = DateTimeFormatter.ofPattern("MMMMM").format(currentMonth);
         if (view != null && !TextUtils.isEmpty(month)) {
             String formattedMonth = month.substring(0, 1).toUpperCase(Locale.getDefault()) + month.substring(1);
             view.onCurrentMonthChanged(formattedMonth);

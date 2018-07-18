@@ -1,80 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/calendar_header_gradient_bg"
+    android:padding="16dp">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:text="Другой период"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"/>
 
-        <TextView
-            android:id="@+id/firstDay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="1"
-            android:maxWidth="250dp"
-            android:singleLine="true"
-            android:text="@string/first_day_selected"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"/>
-
-        <TextView
-            android:id="@+id/first_day_selected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="1"
-            android:maxWidth="250dp"
-            android:singleLine="true"
-            android:text="@string/day_month_year"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/closeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:gravity="center"
-        android:orientation="vertical">
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/ic_close"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="6dp"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="1"
-            android:maxWidth="250dp"
-            android:singleLine="true"
-            android:text="@string/last_day_selected"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"/>
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="56dp"/>
 
-        <TextView
-            android:id="@+id/last_day_selected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="1"
-            android:maxWidth="250dp"
-            android:singleLine="true"
-            android:text="@string/day_month_year"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"/>
-    </LinearLayout>
-</RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/calendar_header_white_bg"
+        app:layout_constraintTop_toBottomOf="@+id/guideline"/>
+
+    <TextView
+        android:id="@+id/startDayHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/guideline"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:text="Начало отчета"
+        android:textColor="@android:color/white"
+        android:textSize="10sp"/>
+
+    <TextView
+        android:id="@+id/first_day_selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@+id/startDayHeader"
+        app:layout_constraintLeft_toLeftOf="@+id/startDayHeader"
+        tools:text="16 сентября 2018"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/verticalGuideline"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <TextView
+        android:id="@+id/endDayHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/guideline"
+        app:layout_constraintLeft_toLeftOf="@+id/verticalGuideline"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:text="Конец периода"
+        android:textColor="@android:color/white"
+        android:textSize="10sp"/>
+
+    <TextView
+        android:id="@+id/last_day_selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@+id/endDayHeader"
+        app:layout_constraintLeft_toLeftOf="@+id/endDayHeader"
+        tools:text="16 сентября 2018"/>
+
+</android.support.constraint.ConstraintLayout>

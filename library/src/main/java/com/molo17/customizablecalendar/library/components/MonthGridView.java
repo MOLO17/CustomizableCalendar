@@ -17,17 +17,18 @@ import com.molo17.customizablecalendar.library.model.CalendarItem;
 import com.molo17.customizablecalendar.library.presenter.interfeaces.CustomizableCalendarPresenter;
 import com.molo17.customizablecalendar.library.view.BaseView;
 
-import org.joda.time.DateTime;
+import org.threeten.bp.LocalDate;
+
 
 /**
  * Created by francescofurlan on 23/06/17.
  */
 
 public class MonthGridView extends LinearLayout implements BaseView {
-    protected DateTime monthDateTime;
+    protected LocalDate monthDateTime;
     private MonthAdapter calendarAdapter;
     private GridView calendarGrid;
-    private DateTime currentMonth;
+    private LocalDate currentMonth;
     private
     @LayoutRes
     int layoutResId = -1;
@@ -50,7 +51,7 @@ public class MonthGridView extends LinearLayout implements BaseView {
     }
 
     private void init(Context context, AttributeSet attrs) {
-        monthDateTime = new DateTime();
+        monthDateTime = LocalDate.now();
         layoutResId = R.layout.calendar_view;
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomizableCalendar);
@@ -134,7 +135,7 @@ public class MonthGridView extends LinearLayout implements BaseView {
         }
     }
 
-    public void setCurrentMonth(DateTime currentMonth) {
+    public void setCurrentMonth(LocalDate currentMonth) {
         this.currentMonth = currentMonth;
         setupCalendar();
     }

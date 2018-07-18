@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="red">#F65E64</color>
+    <color name="redDark">#DB3D44</color>
+    <color name="black">#212121</color>
+    <color name="gray_text">#747474</color>
+    <color name="divider" tools:ignore="MissingDefaultResource">#e0e0e0</color>
+    <color name="green">#71c174</color>
+    <color name="grayIcon">#747474</color>
+    <color name="background">#FFFFFF</color>
+    <color name="grayDisabled">#747474</color>
+    <color name="redDisable">#FAADB0</color>
+    <color name="redEnable">#d85257</color>
+    <color name="orange">#fd7c58</color>
+    <color name="redError">#b00020</color>
 </resources>

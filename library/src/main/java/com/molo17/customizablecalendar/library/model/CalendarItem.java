@@ -1,6 +1,6 @@
 package com.molo17.customizablecalendar.library.model;
 
-import org.joda.time.DateTime;
+import org.threeten.bp.LocalDate;
 
 import java.util.Calendar;
 
@@ -10,29 +10,32 @@ import java.util.Calendar;
 
 public class CalendarItem {
     private long id;
-    private DateTime dateTime;
+    private LocalDate dateTime;
     private boolean selected;
 
-    public CalendarItem(Calendar calendar) {
-        this.dateTime = new DateTime(calendar);
-        this.id = calendar.getTimeInMillis();
-    }
+//    public CalendarItem(Calendar calendar) {
+//        this.dateTime = LocalDate.of(
+//                calendar.get(Calendar.YEAR),
+//                calendar.get(Calendar.MONTH) + 1,
+//                calendar.get(Calendar.DAY_OF_MONTH));
+//        this.id = calendar.getTimeInMillis();
+//    }
 
-    public CalendarItem(DateTime dateTime) {
-        this.dateTime = dateTime;
-        this.id = dateTime.getMillis();
-    }
+//    public CalendarItem(LocalDate dateTime) {
+//        this.dateTime = dateTime;
+//        this.id = dateTime.toEpochDay();
+//    }
 
     public CalendarItem(int day, int month, int year) {
-        this.dateTime = new DateTime(year, month, day, 0, 0);
-        this.id = dateTime.getMillis();
+        this.dateTime = LocalDate.of(year, month, day);
+        this.id = dateTime.toEpochDay();
     }
 
-    public DateTime getDateTime() {
+    public LocalDate getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(DateTime dateTime) {
+    public void setDateTime(LocalDate dateTime) {
         this.dateTime = dateTime;
     }
 
@@ -52,7 +55,7 @@ public class CalendarItem {
         this.id = id;
     }
 
-    public int compareTo(DateTime today) {
+    public int compareTo(LocalDate today) {
         return dateTime.compareTo(today);
     }
 
@@ -65,7 +68,7 @@ public class CalendarItem {
     }
 
     public int getMonth() {
-        return dateTime.getMonthOfYear();
+        return dateTime.getMonthValue();
     }
 
     public int getYear() {

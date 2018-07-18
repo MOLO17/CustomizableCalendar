@@ -7,7 +7,9 @@ import com.molo17.customizablecalendar.library.components.CustomizableCalendar;
 import com.molo17.customizablecalendar.library.interactors.AUCalendar;
 import com.molo17.customizablecalendar.library.model.Calendar;
 
-import org.joda.time.DateTime;
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.Month;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -22,16 +24,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateData() {
         // setting up first and last month that must be showed in the calendar
-        DateTime firstMonth = new DateTime().withMonthOfYear(1);
-        DateTime lastMonth = new DateTime();
+        LocalDate firstMonth = LocalDate.now().withDayOfYear(1);
+        LocalDate lastMonth = LocalDate.now();
 
         // create the Calendar obj and setting it up with some configs like:
         // - first selected day
         // - last selected day
         // - multiple selection
         final Calendar calendar = new Calendar(firstMonth, lastMonth);
-        calendar.setFirstSelectedDay(new DateTime());
-        calendar.setLastSelectedDay(new DateTime());
+        calendar.setFirstSelectedDay(LocalDate.now());
+        calendar.setLastSelectedDay(LocalDate.now());
         calendar.setMultipleSelection(true);
 
         CustomizableCalendar customizableCalendar = findViewById(R.id.view_month);

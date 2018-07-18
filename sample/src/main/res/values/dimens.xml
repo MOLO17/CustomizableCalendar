@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="customizable_calendar_height">260dp</dimen>
+
+    <dimen name="cell_size">32dp</dimen>
 </resources>

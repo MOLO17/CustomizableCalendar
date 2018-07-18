@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <View
+        android:id="@android:id/background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/state_range_middle"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@android:id/title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@android:id/title"
+        tools:visibility="visible"/>
+
+    <View
+        android:id="@android:id/stopSelectingText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/state_range_middle"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@android:id/title"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@android:id/title"
+        tools:visibility="gone"/>
+
+    <View
+        android:id="@android:id/startSelectingText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/state_range_middle"
+        app:layout_constraintBottom_toBottomOf="@android:id/title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/guideline1"
+        app:layout_constraintTop_toTopOf="@android:id/title"
+        android:visibility="visible"
+        tools:visibility="gone"/>
+
+    <View
+        android:id="@+id/selectedBackgroundView"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@drawable/state_range_first"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone"/>
+
+    <TextView
+        android:id="@android:id/title"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="12"/>
+
+
+
+</android.support.constraint.ConstraintLayout>

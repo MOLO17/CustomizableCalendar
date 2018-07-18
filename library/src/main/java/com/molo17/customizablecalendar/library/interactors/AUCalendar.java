@@ -3,7 +3,7 @@ package com.molo17.customizablecalendar.library.interactors;
 import com.molo17.customizablecalendar.library.model.Calendar;
 import com.molo17.customizablecalendar.library.model.CalendarFields;
 
-import org.joda.time.DateTime;
+import org.threeten.bp.LocalDate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class AUCalendar {
         return AUCalendarInstance;
     }
 
-    public DateTime getFirstMonth() {
+    public LocalDate getFirstMonth() {
         return calendar.getFirstMonth();
     }
 
@@ -64,44 +64,44 @@ public class AUCalendar {
         emitOnChange(changeSet);
     }
 
-    public DateTime getFirstSelectedDay() {
+    public LocalDate getFirstSelectedDay() {
         return calendar.getFirstSelectedDay();
     }
 
-    public void setFirstSelectedDay(DateTime firstSelectedDay) {
+    public void setFirstSelectedDay(LocalDate firstSelectedDay) {
         if (calendar.getFirstSelectedDay() != firstSelectedDay) {
             calendar.setFirstSelectedDay(firstSelectedDay);
             emitOnChange(CalendarFields.FIRST_SELECTED_DAY);
         }
     }
 
-    public DateTime getLastSelectedDay() {
+    public LocalDate getLastSelectedDay() {
         return calendar.getLastSelectedDay();
     }
 
-    public void setLastSelectedDay(DateTime lastSelectedDay) {
+    public void setLastSelectedDay(LocalDate lastSelectedDay) {
         if (calendar.getLastSelectedDay() != lastSelectedDay) {
             calendar.setLastSelectedDay(lastSelectedDay);
             emitOnChange(CalendarFields.LAST_SELECTED_DAY);
         }
     }
 
-    public DateTime getCurrentMonth() {
+    public LocalDate getCurrentMonth() {
         return calendar.getCurrentMonth();
     }
 
-    public void setCurrentMonth(DateTime currentMonth) {
+    public void setCurrentMonth(LocalDate currentMonth) {
         if (calendar.getCurrentMonth() != currentMonth) {
             calendar.setCurrentMonth(currentMonth);
             emitOnChange(CalendarFields.CURRENT_MONTH);
         }
     }
 
-    public List<DateTime> getMonths() {
+    public List<LocalDate> getMonths() {
         return calendar.getMonths();
     }
 
-    public void setMonths(List<DateTime> months) {
+    public void setMonths(List<LocalDate> months) {
         if (calendar.getMonths() != months) {
             calendar.setMonths(months);
             emitOnChange(CalendarFields.MONTHS);

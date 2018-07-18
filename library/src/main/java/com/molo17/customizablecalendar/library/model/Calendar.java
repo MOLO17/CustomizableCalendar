@@ -1,7 +1,8 @@
 package com.molo17.customizablecalendar.library.model;
 
-import org.joda.time.DateTime;
-import org.joda.time.Months;
+
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.Period;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,62 +13,62 @@ import java.util.Locale;
  */
 
 public class Calendar {
-    private DateTime firstMonth;
-    private DateTime firstSelectedDay;
-    private DateTime lastSelectedDay;
-    private DateTime currentMonth;
-    private List<DateTime> months;
+    private LocalDate firstMonth;
+    private LocalDate firstSelectedDay;
+    private LocalDate lastSelectedDay;
+    private LocalDate currentMonth;
+    private List<LocalDate> months;
     private boolean multipleSelection;
     private int firstDayOfWeek;
 
-    public Calendar(DateTime firstMonth, DateTime lastMonth) {
+    public Calendar(LocalDate firstMonth, LocalDate lastMonth) {
         this.firstMonth = firstMonth;
         this.firstDayOfWeek = java.util.Calendar.getInstance(Locale.getDefault()).getFirstDayOfWeek();
 
-        DateTime startMonth = firstMonth.plusMonths(1);
-        int monthsBetweenCount = Months.monthsBetween(firstMonth, lastMonth).getMonths();
+        LocalDate startMonth = firstMonth.plusMonths(1);
+        int monthsBetweenCount = Period.between(firstMonth, lastMonth).getMonths();
 
         months = new ArrayList<>();
 
         months.add(firstMonth);
         currentMonth = firstMonth;
 
-        DateTime monthToAdd = new DateTime(startMonth.getYear(), startMonth.getMonthOfYear(), 1, 0, 0);
+        LocalDate monthToAdd = LocalDate.of(startMonth.getYear(), startMonth.getMonth(), 1);
         for (int i = 0; i <= monthsBetweenCount; i++) {
             months.add(monthToAdd);
             monthToAdd = monthToAdd.plusMonths(1);
         }
     }
 
-    public DateTime getFirstSelectedDay() {
+    public LocalDate getFirstSelectedDay() {
         return firstSelectedDay;
     }
 
-    public void setFirstSelectedDay(DateTime firstSelectedDay) {
+    public void setFirstSelectedDay(LocalDate firstSelectedDay) {
         this.firstSelectedDay = firstSelectedDay;
     }
 
-    public DateTime getLastSelectedDay() {
+    public LocalDate getLastSelectedDay() {
         return lastSelectedDay;
     }
 
-    public void setLastSelectedDay(DateTime lastSelectedDay) {
+    public void setLastSelectedDay(LocalDate lastSelectedDay) {
         this.lastSelectedDay = lastSelectedDay;
     }
 
-    public DateTime getCurrentMonth() {
+    public LocalDate getCurrentMonth() {
         return currentMonth;
     }
 
-    public void setCurrentMonth(DateTime currentMonth) {
+    public void setCurrentMonth(LocalDate currentMonth) {
         this.currentMonth = currentMonth;
     }
 
-    public List<DateTime> getMonths() {
+    public List<LocalDate> getMonths() {
         return months;
     }
 
-    public void setMonths(List<DateTime> months) {
+    public void setMonths(List<LocalDate> months) {
         this.months = months;
     }
 
@@ -87,7 +88,7 @@ public class Calendar {
         this.firstDayOfWeek = firstDayOfWeek;
     }
 
-    public DateTime getFirstMonth() {
+    public LocalDate getFirstMonth() {
         return firstMonth;
     }
 }

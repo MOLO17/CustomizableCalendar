@@ -16,7 +16,8 @@ import com.molo17.customizablecalendar.library.interactors.ViewInteractor;
 import com.molo17.customizablecalendar.library.presenter.interfeaces.CustomizableCalendarPresenter;
 import com.molo17.customizablecalendar.library.view.CalendarView;
 
-import org.joda.time.DateTime;
+import org.threeten.bp.LocalDate;
+
 
 /**
  * Created by francescofurlan on 23/06/17.
@@ -124,7 +125,7 @@ public class CalendarRecyclerView extends RecyclerView implements CalendarView {
                         View view = snapHelper.findSnapView(getLayoutManager());
                         if (view != null) {
                             int currentPosition = getChildAdapterPosition(view);
-                            DateTime currentMonth = calendar.getMonths().get(currentPosition);
+                            LocalDate currentMonth = calendar.getMonths().get(currentPosition);
                             calendar.setCurrentMonth(currentMonth);
                         }
                     }

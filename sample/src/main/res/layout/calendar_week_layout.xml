@@ -3,7 +3,7 @@
     android:id="@android:id/summary"
     android:layout_width="32dp"
     android:layout_height="32dp"
-    android:layout_margin="5dp"
+    android:layout_margin="2dp"
     android:gravity="center"
     android:layout_gravity="center_horizontal"
     android:textColor="#747474"

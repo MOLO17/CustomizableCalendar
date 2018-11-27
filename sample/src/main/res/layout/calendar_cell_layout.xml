@@ -49,11 +49,11 @@
         android:visibility="visible"
         tools:visibility="gone"/>
 
-    <View
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/selectedBackgroundView"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:background="@drawable/state_range_first"
+        app:srcCompat="@drawable/state_range_first"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -65,7 +65,7 @@
         android:id="@android:id/title"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_margin="5dp"
+        android:layout_margin="2dp"
         android:gravity="center"
         android:textColor="@android:color/black"
         android:textSize="14sp"

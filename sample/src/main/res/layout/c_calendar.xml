@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         app:layout="@layout/calendar_week_layout"
         android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="3dp"
+        android:layout_marginLeft="4dp"
         android:layout_marginTop="8dp"/>
 
     <com.molo17.customizablecalendar.library.components.CalendarRecyclerView

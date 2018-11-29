@@ -25,7 +25,7 @@ public class Calendar {
         this.firstMonth = firstMonth;
         this.firstDayOfWeek = java.util.Calendar.getInstance(Locale.getDefault()).getFirstDayOfWeek();
 
-        int monthsBetweenCount = Period.between(firstMonth, lastMonth).getMonths();
+        long monthsBetweenCount = Period.between(firstMonth, lastMonth).toTotalMonths();
 
         months = new ArrayList<>();
 

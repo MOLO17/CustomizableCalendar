@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateData() {
         // setting up first and last month that must be showed in the calendar
-        LocalDate firstMonth = LocalDate.now().withDayOfYear(1);
+        LocalDate firstMonth = LocalDate.of(1990, Month.JANUARY, 1);
         LocalDate lastMonth = LocalDate.now();
 
         // create the Calendar obj and setting it up with some configs like:

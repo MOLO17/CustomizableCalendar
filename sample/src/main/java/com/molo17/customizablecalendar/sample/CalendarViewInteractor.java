@@ -77,7 +77,6 @@ public class CalendarViewInteractor implements ViewInteractor {
             LocalDate currentMonth1 = calendar.getCurrentMonth();
             if (currentMonth1.compareTo(calendar.getFirstMonth()) > 0) {
                 layoutManager.scrollToPosition(position - 1);
-                calendarRecyclerView.post(() -> AUCalendar.getInstance().setCurrentMonth(currentMonth.minusMonths(1)));
             }
         });
         view.findViewById(R.id.nextIcon).setOnClickListener(v -> {
@@ -88,7 +87,6 @@ public class CalendarViewInteractor implements ViewInteractor {
             LocalDate lastMonth = calendar.getMonths().get(calendar.getMonths().size() - 1);
             if (currentMonth1.compareTo(lastMonth) < 0) {
                 layoutManager.scrollToPosition(position + 1);
-                calendarRecyclerView.post(() -> AUCalendar.getInstance().setCurrentMonth(currentMonth.plusMonths(1)));
             }
         });
     }

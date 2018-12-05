@@ -53,6 +53,10 @@ public class AUCalendar {
         onChangeListenerList.remove(objectChangeListener);
     }
 
+    public void clearAllChangeListener() {
+        onChangeListenerList.clear();
+    }
+
     private void emitOnChange(ChangeSet changeSet) {
         for (CalendarObjectChangeListener onChangeListener : onChangeListenerList) {
             onChangeListener.onChange(changeSet);

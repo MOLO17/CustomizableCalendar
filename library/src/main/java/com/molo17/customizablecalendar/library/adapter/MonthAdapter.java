@@ -294,6 +294,9 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
 
         }
         if (!updatedDays.equals(days)) {
+            if (days != null) {
+                days.clear();
+            }
             days = updatedDays;
             notifyDataSetChanged();
         }

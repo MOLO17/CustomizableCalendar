@@ -117,9 +117,20 @@ public class CalendarRecyclerView extends RecyclerView implements CalendarView {
         });
 
         addOnScrollListener(new OnScrollListener() {
+
+            private boolean isInitialized = false;
+
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (isInitialized) {
+                    setCurrentMonth(snapHelper);
+                } else {
+                    isInitialized = true;
+                }
+            }
+
+            private void setCurrentMonth(PagerSnapHelper snapHelper) {
                 View view = snapHelper.findSnapView(getLayoutManager());
                 if (view != null) {
                     int currentPosition = getChildAdapterPosition(view);

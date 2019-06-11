@@ -40,6 +40,7 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
     private LocalDate firstSelectedDay;
     private LocalDate lastSelectedDay;
     private boolean multipleSelection;
+    private boolean allowSelectionFeatureDays;
     private int firstDayOfWeek;
 
     private boolean subscribed;
@@ -57,6 +58,7 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
         firstSelectedDay = calendar.getFirstSelectedDay();
         lastSelectedDay = calendar.getLastSelectedDay();
         multipleSelection = calendar.isMultipleSelectionEnabled();
+        allowSelectionFeatureDays = calendar.isAllowSelectionFeatureDays();
         firstDayOfWeek = calendar.getFirstDayOfWeek();
     }
 
@@ -189,29 +191,33 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
      */
     @Override
     public void setSelected(LocalDate dateSelected) {
-        if (dateSelected.compareTo(LocalDate.now()) > 0) {
+        if (!allowSelectionFeatureDays && dateSelected.compareTo(LocalDate.now()) > 0) {
             return;
         }
 
-        LocalDate firstSelectedDay = calendar.getFirstSelectedDay();
-
-        if (firstSelectedDay == null) {
+        if (!multipleSelection) {
             notifyFirstSelectionUpdated(dateSelected);
-            notifyLastSelectionUpdated(dateSelected);
-            calendar.setSelectStarted(true);
         } else {
-            if (!calendar.isSelectStarted()) {
+            LocalDate firstSelectedDay = calendar.getFirstSelectedDay();
+
+            if (firstSelectedDay == null) {
                 notifyFirstSelectionUpdated(dateSelected);
                 notifyLastSelectionUpdated(dateSelected);
                 calendar.setSelectStarted(true);
             } else {
-                if (dateSelected.compareTo(firstSelectedDay) < 0) {
+                if (!calendar.isSelectStarted()) {
                     notifyFirstSelectionUpdated(dateSelected);
-                    notifyLastSelectionUpdated(firstSelectedDay);
-                } else {
                     notifyLastSelectionUpdated(dateSelected);
+                    calendar.setSelectStarted(true);
+                } else {
+                    if (dateSelected.compareTo(firstSelectedDay) < 0) {
+                        notifyFirstSelectionUpdated(dateSelected);
+                        notifyLastSelectionUpdated(firstSelectedDay);
+                    } else {
+                        notifyLastSelectionUpdated(dateSelected);
+                    }
+                    calendar.setSelectStarted(false);
                 }
-                calendar.setSelectStarted(false);
             }
         }
 
@@ -272,7 +278,7 @@ public class MonthAdapter extends BaseAdapter implements MonthView {
         List<CalendarItem> updatedDays = new ArrayList<>();
 
         if (viewInteractor != null && viewInteractor.hasImplementedDayCalculation()) {
-            days = viewInteractor.calculateDays(year, month, firstDayOfMonth, lastDayOfMonth);
+            updatedDays = viewInteractor.calculateDays(year, month, firstDayOfMonth, lastDayOfMonth);
         } else {
             // default days calculation
             if (firstDayOfMonth == firstDayOfWeek) {

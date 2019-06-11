@@ -19,6 +19,7 @@ public class Calendar {
     private LocalDate currentMonth;
     private List<LocalDate> months;
     private boolean multipleSelection;
+    private boolean allowSelectionFeatureDays;
     private int firstDayOfWeek;
 
     public Calendar(LocalDate firstMonth, LocalDate lastMonth) {
@@ -74,8 +75,16 @@ public class Calendar {
         return multipleSelection;
     }
 
+    public boolean isAllowSelectionFeatureDays() {
+        return allowSelectionFeatureDays;
+    }
+
     public void setMultipleSelection(boolean multipleSelection) {
         this.multipleSelection = multipleSelection;
+    }
+
+    public void setAllowSelectionFeatureDays(boolean allowSelectionFeatureDays) {
+        this.allowSelectionFeatureDays = allowSelectionFeatureDays;
     }
 
     public int getFirstDayOfWeek() {

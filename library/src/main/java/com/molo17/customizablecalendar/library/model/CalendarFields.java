@@ -5,6 +5,7 @@ import android.support.annotation.StringDef;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+import static com.molo17.customizablecalendar.library.model.CalendarFields.ALLOW_SELECTION_FEATURE_DAYS;
 import static com.molo17.customizablecalendar.library.model.CalendarFields.CURRENT_MONTH;
 import static com.molo17.customizablecalendar.library.model.CalendarFields.FIRST_DAY_OF_WEEK;
 import static com.molo17.customizablecalendar.library.model.CalendarFields.FIRST_SELECTED_DAY;
@@ -22,6 +23,7 @@ import static com.molo17.customizablecalendar.library.model.CalendarFields.MULTI
         CURRENT_MONTH,
         MONTHS,
         MULTIPLE_SELECTION,
+        ALLOW_SELECTION_FEATURE_DAYS,
         FIRST_DAY_OF_WEEK
 })
 
@@ -32,5 +34,6 @@ public @interface CalendarFields {
     String CURRENT_MONTH = "currentMonth";
     String MONTHS = "months";
     String MULTIPLE_SELECTION = "multipleSelection";
+    String ALLOW_SELECTION_FEATURE_DAYS = "allowSelectionFeatureDays";
     String FIRST_DAY_OF_WEEK = "firstDayOfWeek";
 }

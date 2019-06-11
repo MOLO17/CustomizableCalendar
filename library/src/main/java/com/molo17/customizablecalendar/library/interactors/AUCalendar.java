@@ -117,10 +117,21 @@ public class AUCalendar {
         return calendar.isMultipleSelectionEnabled();
     }
 
+    public boolean isAllowSelectionFeatureDays() {
+        return calendar.isAllowSelectionFeatureDays();
+    }
+
     public void setMultipleSelection(boolean multipleSelection) {
         if (calendar.isMultipleSelectionEnabled() != multipleSelection) {
             calendar.setMultipleSelection(multipleSelection);
             emitOnChange(CalendarFields.MULTIPLE_SELECTION);
+        }
+    }
+
+    public void setAllowSelectionFeatureDays(boolean allowSelectionFeatureDays) {
+        if (calendar.isAllowSelectionFeatureDays() != allowSelectionFeatureDays) {
+            calendar.setAllowSelectionFeatureDays(allowSelectionFeatureDays);
+            emitOnChange(CalendarFields.ALLOW_SELECTION_FEATURE_DAYS);
         }
     }
 

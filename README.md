@@ -292,4 +292,4 @@ Here are listed all of the methods with a small description:
 
 Getting Help
 ------------
-To report a specific problem or feature request, [open a new issue here on Github](https://github.com/MOLO17/CustomizableCalendar/issues/new). For questions, suggestions, or anything else, email us at helpdesk@molo17.com.
+To report a specific problem or feature request, [open a new issue here on Github](https://github.com/MOLO17/CustomizableCalendar/issues/new). For questions, suggestions, or anything else, email us at sales@molo17.com.
